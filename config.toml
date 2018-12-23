@@ -1,0 +1,12 @@
+baseURL = "http://example.org/"
+languageCode = "jp"
+title = "sk0's blog"
+theme = "sk0"
+canonifyurls = true
+hasCJKLanguage = true
+summaryLength = 70
+pygmentsCodeFences = true
+[params]
+  author = "sk0"
+
+# canonifyurls = true

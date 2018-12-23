@@ -1,0 +1,10 @@
+/public
+/themes/*
+!/themes/sk0
+/themes/sk0/*
+!/themes/sk0/static
+/themes/sk0/static/*
+!/themes/sk0/static/common
+/themes/sk0/static/common/*
+!/themes/sk0/static/common/bundle.css
+
