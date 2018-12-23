@@ -1,0 +1,28 @@
+  <article class="listed_article">
+    <h1><a href="{{.Permalink}}">{{.Title}}</a></h1>
+    <div class="listed_article_info">
+      <p>published:
+        <time>{{ .Date.Format "Jan 2, 2006"}},<br></time> modified:
+        <time>{{ .Lastmod.Format "Jan 2, 2006"}}.</time>
+      </p>
+      <p>
+        categories:
+        {{with .Params.categories}}
+        {{range .}}
+        <a href="/categories/{{.|urlize}}">{{.}}</a>
+        {{end}}
+        {{else}}None{{end}}
+      </p>
+      <p>
+        tags:
+        {{with .Params.tags}}
+        {{range .}}
+        <a href="/tags/{{.|urlize}}">{{.}}</a>
+        {{end}}
+        {{else}}None{{end}}
+      </p>
+      <div class="summary">{{.Summary}}...
+        <p class="more"><a href="{{.Permalink}}">[Read More]</a></p>
+      </div>
+    </div>
+  </article>

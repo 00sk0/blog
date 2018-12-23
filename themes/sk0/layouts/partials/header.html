@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {{define "title0" -}}
+      {{if and (eq .Title "Posts") (eq .Section "posts")}}
+        archives
+      {{else if ne (lower .Title) (lower .Section)}}
+        {{if eq .Section "tags"}}tags: {{- lower .Title -}}
+        {{- else if eq .Section "categories"}}categories: {{- lower .Title -}}
+        {{- else -}} {{.Title}}
+        {{- end -}}
+      {{else}}
+      {{- lower .Title -}}
+      {{end}}
+    {{- end -}}
+    <title>{{template "title0" . -}}{{ if ne .Title .Site.Title }} - {{ .Site.Title }}{{- end}}</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="/">{{ .Site.Title }}</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            <!-- <li><a href="/">home</a></li> -->
+            <!-- <li><a href="/posts">archives</a></li> -->
+            <!-- <li><a href="/categories">categories</a></li>
+            <li><a href="/categories">categories</a></li> -->
+            <li><a href="/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>

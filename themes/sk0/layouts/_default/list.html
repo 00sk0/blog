@@ -1,0 +1,33 @@
+{{ partial "header.html" . }}
+        <article id="main">
+          <header>
+            <h1>
+              {{if and (eq .Title "Posts") (eq .Section "posts")}}
+              Archives
+              {{else if ne (lower .Title) (lower .Section)}}
+              {{if eq .Section "tags"}}Tags: {{else if eq .Section "categories"}}Categories: {{end}}
+              {{lower .Title}}
+              {{else}}{{.Title}}{{end}}
+            </h1>
+          </header>
+          {{$is_terms := or (and (eq .Title "Tags") (eq .Section "tags")) (and (eq .Title "Categories") (eq .Section "categories"))}}
+          <div id="article_list">
+            {{if $is_terms}}
+            {{$kind := .Data.Plural}}
+            <p id="enumerated_taxonomy"> {{len .Data.Terms}} {{$kind}} in total:<br>
+            {{range $_,$value := .Data.Terms.ByCount}}
+            <span class="enumed">
+              <a href="/{{$kind}}/{{$value.Term|urlize}}">{{lower $value.Term}}</a><sub>x{{$value.Count}}</sub>
+            </span>
+            {{end}}
+            </p>
+            {{else}}
+            {{range .Paginator.Pages}}
+            {{- partial "listed_articles.html" . -}}
+            {{end}}
+            {{end}}
+          </div>
+          {{if $is_terms -}}{{- else -}}{{- partial "list_adj.html" . -}}{{- end}}
+        </article>
+
+{{ partial "footer.html" . }}

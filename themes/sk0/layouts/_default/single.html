@@ -1,0 +1,47 @@
+{{ partial "header.html" . }}
+        <article id="main">
+          <header>
+            <h1>{{.Title}}</h1>
+            {{$is_post := eq .Type "posts" -}}
+            {{if $is_post}}
+            <div id="article_info">
+              <p id="dates">published:
+                <time>{{ .Date.Format "Jan 2, 2006"}},</time><br> modified:
+                <time>{{ .Lastmod.Format "Jan 2, 2006"}}.</time>
+              </p>
+              <p id="categories">
+                categories:
+                {{with .Params.categories}}
+                {{range .}}
+                <a href="/categories/{{.|urlize}}">{{.}}</a>
+                {{end}}
+                {{else}}None{{end}}
+              </p>
+              <p id="tags">
+                tags:
+                {{with .Params.tags}}
+                {{range .}}
+                <a href="/tags/{{.|urlize}}">{{.}}</a>
+                {{end}}
+                {{else}}None{{end}}
+              </p>
+            </div>
+            {{end}}
+          </header>
+          {{ .Content }}
+          {{ if $is_post -}}
+          <nav id="adjacent">
+            {{with .NextInSection}}
+            <div id="next">
+              <p><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+            </div>
+            {{end}}
+            {{with .PrevInSection}}
+            <div id="prev">
+              <p><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+            </div>
+            {{end}}
+          </nav>
+          {{- end }}
+        </article>
+{{ partial "footer.html" . }}

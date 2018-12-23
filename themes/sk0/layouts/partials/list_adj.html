@@ -1,0 +1,16 @@
+
+    <nav id="adjacent_list">
+      {{if .Paginator.HasNext}}
+      <div id="prev">
+        <p><a href="{{ .Paginator.Next.URL }}">older</a></p>
+      </div>
+      {{end}}
+      <div id="_of_page">
+        <p>page {{ .Paginator.PageNumber }} of {{.Paginator.TotalPages}} </p>
+      </div>
+      {{if .Paginator.HasPrev}}
+      <div id="next">
+        <p><a href="{{ .Paginator.Prev.URL }}">newer</a></p>
+      </div>
+      {{end}}
+    </nav>

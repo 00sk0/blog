@@ -1,0 +1,45 @@
+        <div id="information">
+          <aside id="brief_about">
+            <p>(TBU)</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="\posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                {{ range where .Site.RegularPages.ByDate.Reverse "Type" "posts" }}
+                  <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                {{- end}}
+              </ul>
+            </section>
+            <section>
+              {{- $cat := .Site.Taxonomies.categories.ByCount -}}
+              {{- $max := 20 -}}
+              {{- $kind := "categories" -}}
+              <h1><a href="/{{- $kind -}}">Categories</a><sub>x{{- len $cat -}}</sub></h1>
+              <ul id="info_categories">
+                {{range $idx,$value := $cat -}}
+                {{- if lt $idx $max -}}
+                <li><a href="/{{- $kind -}}/{{- $value.Term|urlize -}}">{{- lower $value.Term -}}</a><sub>x{{- $value.Count -}}</sub></li>
+                {{end -}}{{- end -}}{{- if gt (len $cat) $max -}}
+                  <li><a href="/{{- $kind -}}">...</a></li>
+                {{- end -}}
+              </ul>
+            </section>
+            <section>
+              {{- $cat := .Site.Taxonomies.tags.ByCount -}}
+              {{- $max := 20 -}}
+              {{- $kind := "tags" -}}
+              <h1><a href="/{{- $kind -}}">Tags</a><sub>x{{- len $cat -}}</sub></h1>
+              <ul id="info_tags">
+                {{range $idx,$value := $cat -}}
+                {{- if lt $idx $max -}}
+                <li><a href="/{{- $kind -}}/{{- $value.Term|urlize -}}">{{- lower $value.Term -}}</a><sub>x{{- $value.Count -}}</sub></li>
+                {{end -}}
+                {{- end -}}
+                {{- if gt (len $cat) $max -}}
+                  <li><a href="/{{- $kind -}}">...</a></li>
+                {{- end -}}
+              </ul>
+            </section>
+          </nav>
+        </div>
