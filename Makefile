@@ -20,4 +20,4 @@ build:
 # 	npm run deploy
 
 post:
-	[[ ! -z ${name} ]] && echo "%x[hugo new posts/${name}.md]"
+	[[ ! -z ${name} ]] && ruby -e "%x[hugo new posts/${name}.md]"
