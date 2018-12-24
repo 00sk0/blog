@@ -21,4 +21,6 @@ build:
     # https://devcenter.wercker.com/development/steps/
   steps:
     - arjen/hugo-build@2.7.0:
+      version: "0.50"
+      config: config.toml
 
