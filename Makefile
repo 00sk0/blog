@@ -11,8 +11,13 @@ serve_hugo:
 clean:
 	rm -r public
 
-product:
+build:
+	make clean
 	hugo
 
-hoge:
+# deploy:
+# 	make build
+# 	npm run deploy
+
+post:
 	[[ ! -z ${name} ]] && echo "%x[hugo new posts/${name}.md]"
