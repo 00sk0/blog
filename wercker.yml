@@ -23,4 +23,11 @@ build:
     - arjen/hugo-build@2.7.0:
       version: "0.50"
       config: config.toml
-
+deploy:
+  steps:
+    - install-packages:
+      packages: git ssh-client
+    - lukevivier/gh-pages@0.2.1:
+      token: $GIT_TOKEN
+      domain: hugowercker.ig.nore.me
+      basedir: public
