@@ -307,6 +307,21 @@ body #wrap header#top:after {
       }
 body #wrap header#top nav#site {
         padding-right: 1rem;
+        position: absolute;
+        right: 0;
+        bottom: -0.2rem;
+        margin-right: 0.5rem;
+        /* #{nav} >= 3*/
+        /* @media only screen and (min-width: $width2) {*/
+        /*   position: absolute;*/
+        /*   right: 0;*/
+        /*   bottom: -0.2rem;*/
+        /*   margin-right: 0.5rem;*/
+        /* }*/
+        /* @media only screen and (max-width: $width2) {*/
+        /*   width: 100%;*/
+        /*   text-align: center;*/
+        /* }*/
       }
 body #wrap header#top nav#site ul {
           padding-left: 0;
@@ -335,28 +350,15 @@ body #wrap header#top nav#site ul li a {
 body #wrap header#top nav#site ul li a:hover {
                 text-decoration: underline;
               }
-@media only screen and (min-width: 830px) {
-body #wrap header#top nav#site {
-          position: absolute;
-          right: 0;
-          bottom: -0.2rem;
-          margin-right: 0.5rem
-      }
-        }
-@media only screen and (max-width: 830px) {
-body #wrap header#top nav#site {
-          width: 100%;
-          text-align: center
-      }
-        }
 body #wrap main {
       grid-rows: 2;
       margin: 0 auto 0;
-      width: 90%;
-      max-width: 1600px;
+      width: 85%;
+      max-width: 1500px;
       padding: 0 1.5rem;
     }
 body #wrap main h1, body #wrap main h2, body #wrap main h3, body #wrap main h4, body #wrap main h5 {
+        padding: 1rem 0.3rem 0 0;
       }
 body #wrap main h1 {
         font-size: 175%;
@@ -524,12 +526,28 @@ body #wrap main #information {
 body #wrap main #information aside#brief_about {
           text-align: center;
         }
+@media only screen and (max-width: 830px) {
+body #wrap main #information aside#brief_about {
+            margin-top: 3rem
+        }
+          }
 body #wrap main #information nav {
           border-top: solid 1px hsl(150, 10%, 80%);
           padding-top: 1rem;
         }
+@media only screen and (max-width: 830px) {
+body #wrap main #information nav {
+            text-align: center;
+        }
+            body #wrap main #information nav h1 {
+              padding-left: 0.7rem;
+              padding-right: 0.7rem;
+            }
+          }
 body #wrap main #information nav h1 {
             font-size: 1.05rem;
+            border-bottom: solid 0.1rem hsl(150, 10%, 80%);
+            display: inline-block;
           }
 body #wrap main #information nav h1 a {
     color: #34444c;
@@ -684,7 +702,7 @@ body #wrap footer#top:after {
         display: grid;
         grid-template-rows: -webkit-min-content;
         grid-template-rows: min-content;
-        grid-template-columns:  72.5% 1fr;
+        grid-template-columns:  70.5% 1fr;
         min-width: 800px;
       }
         body #wrap main article#main {

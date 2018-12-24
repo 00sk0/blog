@@ -1,6 +1,9 @@
 
 default:
-	make serve_css & make serve_hugo &
+	make serve
+
+serve:
+	make serve_css & make serve_hugo
 
 serve_css:
 	npm run watch --prefix themes/sk0
