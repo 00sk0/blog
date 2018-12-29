@@ -354,7 +354,7 @@ body #wrap main {
       grid-rows: 2;
       margin: 0 auto 0;
       width: 85%;
-      max-width: 1500px;
+      max-width: 1000px;
       padding: 0 1.5rem;
     }
 body #wrap main h1, body #wrap main h2, body #wrap main h3, body #wrap main h4, body #wrap main h5 {
