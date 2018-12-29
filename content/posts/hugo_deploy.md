@@ -1,5 +1,5 @@
 ---
-title:      "Hugo製サイトをGitHub PagesにWerckerでデプロイ"
+title:      "Hugo製サイトをWerckerでGitHub Pagesにデプロイ"
 date:       2018-12-24T15:13:32+09:00
 categories: ["dev"]
 tags:       ["website","hugo","wercker","gh-pages"]
