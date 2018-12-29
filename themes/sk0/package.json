@@ -1,0 +1,26 @@
+{
+  "name": "sk0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "postcss -o static/common/bundle.css src/styles/index.pcss -w --map"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^9.4.3",
+    "cssnano": "^4.1.7",
+    "postcss-calc": "^7.0.1",
+    "postcss-cli": "^6.0.1",
+    "postcss-extend": "^1.0.5",
+    "postcss-import": "^12.0.1",
+    "postcss-inline-comment": "^3.0.0",
+    "postcss-mixins": "^6.2.1",
+    "postcss-nested": "^4.1.1",
+    "postcss-scss": "^2.0.0",
+    "postcss-simple-vars": "^5.0.1"
+  }
+}

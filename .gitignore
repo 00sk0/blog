@@ -2,6 +2,8 @@
 /themes/*
 !/themes/sk0
 /themes/sk0/*
+!/themes/sk0/package.json
+!/themes/sk0/postcss.config.js
 !/themes/sk0/archetypes
 !/themes/sk0/layouts
 !/themes/sk0/static
