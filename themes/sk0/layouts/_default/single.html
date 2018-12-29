@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
         <article id="main">
           <header>
-            <h1>{{.Title}}</h1>
+            <h1>{{.Title}}{{- if .Draft}}<span class="draft"> !!DRAFT!!</span>{{- end -}}</h1>
             {{$is_post := eq .Type "posts" -}}
             {{if $is_post}}
             <div id="article_info">

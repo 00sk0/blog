@@ -6,6 +6,7 @@ canonifyurls = true
 hasCJKLanguage = true
 summaryLength = 70
 pygmentsCodeFences = true
+enableGitInfo = true
 [params]
   author = "sk0"
 
