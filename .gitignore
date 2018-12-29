@@ -6,6 +6,7 @@
 !/themes/sk0/postcss.config.js
 !/themes/sk0/archetypes
 !/themes/sk0/layouts
+!/themes/sk0/src
 !/themes/sk0/static
 /themes/sk0/static/*
 !/themes/sk0/static/common
