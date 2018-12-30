@@ -407,6 +407,7 @@ body #wrap main table td {
         }
 body #wrap main code {
         font-family: "Source Code Pro", monospace;
+        white-space: pre;
         /* font-size: 0.9rem;*/
       }
 body #wrap main pre code {
