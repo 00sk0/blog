@@ -46,7 +46,7 @@ draft:      false
 
 ## テンプレート編集
 
-* `{{partial "\*\*\*.html" .}}`の最後のドットを忘れるとハマります
+* `{{partial "***.html" .}}`の最後のドットを忘れるとハマります
 * [二重波括弧+ハイフン](https://golang.org/pkg/text/template/#hdr-Text_and_spaces)を使わないと不自然な空白ができて生成HTMLが汚くなります．そのうち直したい．
 * 型の（わから）ない世界で格闘することにはなりそうです：今の"`.`"が何を指すのか，何のフィールドを持っているのか，など．[Variables and Params](https://gohugo.io/variables/)を見ればよいと言われればそうなのですが．
   * 例えば`.Data.Terms`とそれを回数順に並べた`.Data.Terms.ByCount`で型が違うのにマニュアルに書かれていないなど

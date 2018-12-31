@@ -11,11 +11,11 @@ draft:      false
 <!--more-->
 
 # Github Pagesについて
-* \*\*\*.github.ioレポジトリ: masterブランチに置いてあるものしか公開できない（レポジトリのsettingsを見ると確かにそう書いてある）[^1]
+* \*\*\*.github.ioレポジトリ: masterブランチに置いてあるものしか公開できない[^1]
 * 今回はmasterブランチにhugoプロジェクトを置きたい
 * そこで個別のリポジトリからgh-pagesブランチを用いて公開する．これは先のドキュメント通り
 
-[^1]:これを勘違いしていて時間が溶けました
+[^1]: レポジトリのsettingsを見ると確かにそう書いてある．これを勘違いしていて時間を溶かした．
 
 # Hugo-build
 - 右上のSteps storeから探す．
@@ -28,7 +28,7 @@ draft:      false
 - Workflows > Add new pipelineからデプロイ用のパイプラインを追加
 - GIT_TOKENを追加．scopeはpublic repositoryを見れるやつにした
 - パイプラインを接続
-- デプロイ成功後にはgh-pagesブランチができていると思うが，先のパイプラインはgh-pagesの更新でも発火してしまう
-	- `could not read wercker yml while getting config: No wercker.yml found`と言われる
+- 先のパイプラインはデプロイ成功によるgh-pagesの更新でも発火してしまう
+	- `could not read wercker yml while getting config: No wercker.yml found`と言われた（それはそう）
 	- Workflowsからbuildを選び，"When new code is pushed On branch(es)"の\*を消してmasterにする
 
