@@ -9,5 +9,6 @@ pygmentsCodeFences = true
 enableGitInfo = true
 [params]
   author = "sk0"
+  myabout = "WIP"
 
 # canonifyurls = true
