@@ -33,12 +33,14 @@ draft:      false
 ## レイアウトの構成
 
 * 公式ドキュメントが手厚すぎてどこから読めばいいのか戸惑うことに
-  * 最初に[Hugo Themes](https://themes.gohugo.io/)のTagsから作りたいサイトの種類（blogなど）を探して出てきたテーマのソースをいくつか読んでみるのがよい気がします
 * 雑な認識：ページの種類に応じて読みに行くhtmlの候補が違う（./index.htmlや./_default/\*\*\*.htmlなど）．それらから参照するテンプレートを./partials/内に入れておく．
   * [Block Templates](https://gohugo.io/templates/base/)だとbaseof.htmlに置いたblockをあとから_default/\*\*\*.htmlなどから埋める構成にできるらしいです（まだ試していません）
-* その候補一覧が[Hugo's Lookup Order](https://gohugo.io/templates/lookup-order/)にあります
+* まずページの種類を知るべきな気がする
+  * 雑な認識：index.htmlを参照するのがトップページ，single.htmlを参照するのが各記事やaboutなどの単発文書，list.htmlを参照するのが記事一覧やTaxonomy（tagやcategoryなど）一覧，またはTaxonomy別の記事一覧．
+* 読みに行く候補の一覧が[Hugo's Lookup Order](https://gohugo.io/templates/lookup-order/)にあります
   * 私は記事最初のTipにあるようにindex.htmlと_default/list.htmlと_default/single.htmlだけ持ってあとは場合分けで済ませました[^2]（表を睨むと確かにこれでよさそうな気がしてきます）
   * 雑な認識：index.htmlを参照するのがトップページ，single.htmlを参照するのが各記事やaboutなどの単発文書，list.htmlを参照するのが記事一覧やTaxonomy（tagやcategoryなど）一覧，またはTaxonomy別の記事一覧．
+* [Hugo Themes](https://themes.gohugo.io/)のTagsから作りたいサイトの種類（blogなど）を探して出てきたテーマのソースをいくつか読んでみるのがよい気がします
 
 [^2]: 今思うとterms.htmlは使うべきでしたが[^3]，「自分で作ったmdはsingle.html，トップはindex.html，それ以外はlist.html」という単純な分類をしたかったという思いがありました．気が向いたら修正します．
 
@@ -46,18 +48,19 @@ draft:      false
 
 ## テンプレート編集
 
+* 先に述べたようなページの種類を把握した上で[Templates](https://gohugo.io/categories/templates)の対応するページを読むのが楽だったように思う[^hoge]
 * `{{partial "***.html" .}}`の最後のドットを忘れるとハマります
 * [二重波括弧+ハイフン](https://golang.org/pkg/text/template/#hdr-Text_and_spaces)を使わないと不自然な空白ができて生成HTMLが汚くなります．そのうち直したい．
 * 型の（わから）ない世界で格闘することにはなりそうです：今の"`.`"が何を指すのか，何のフィールドを持っているのか，など．[Variables and Params](https://gohugo.io/variables/)を見ればよいと言われればそうなのですが．
-  * 例えば`.Data.Terms`とそれを回数順に並べた`.Data.Terms.ByCount`で型が違うのにマニュアルに書かれていないなど
-* 結果的にテンプレートを展開して中身を見るprintfデバッグのようなことを延々としていました
-* 文字列操作関数を自作して使うことはできなそう？
+  * 例えば`.Data.Terms`とそれを回数順に並べた`.Data.Terms.ByCount`で型が違うのにマニュアルに書かれていないなど．
+  * 結果的にテンプレートを展開して中身を見るprintfデバッグのようなことを延々としていました
+* config.tomlの`[param]`内に適当にフィールドを定義して`.Site.Params.***`で取得可能
 
-
+[^hoge]: 分量のあるドキュメントから独力で把握するのが大変だったという話はありまして．
 
 # まとめ
 
-読み返すとマイナス面ばかり目立たせてしまったように思います．確かに全体像を把握しづらく次に何をすべきか分からなくなるという形の難しさは感じたものの，理解が進んだ途端に書きやすくはなりましたし，機能的には十分に満足です．
+読み返すとマイナス面ばかり目立たせてしまったように思います．確かに全体像を把握しづらく次に何をすべきか分からなくなるという形の難しさは感じたものの，Hugo自体やドキュメントの構造に対する理解が進んだ途端に書きやすくはなりましたし，機能的には十分に満足です．
 
 
 
