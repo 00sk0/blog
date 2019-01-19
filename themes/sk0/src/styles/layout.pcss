@@ -10,6 +10,8 @@ $color_hr:hsl(150, 10%, 80%);
 $color_selection-a: hsla(290, 35%, 70%, 0.75);
 $color_selection:   hsl( 290, 35%, 70%);
 
+$color_code_back: hsl(150, 30%, 85%);
+
 $width: 830px;
 
 @define-mixin coloring_default {
@@ -73,10 +75,12 @@ body {
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto;
 
     header#top {
       @mixin coloring_header;
       grid-row: 1;
+      grid-column: 1;
       h1 {
         font-size: 2rem;
         margin-left: 1.5rem;
@@ -128,21 +132,12 @@ body {
         right: 0;
         bottom: -0.2rem;
         margin-right: 0.5rem;
-        // #{nav} >= 3
-        // @media only screen and (min-width: $width2) {
-        //   position: absolute;
-        //   right: 0;
-        //   bottom: -0.2rem;
-        //   margin-right: 0.5rem;
-        // }
-        // @media only screen and (max-width: $width2) {
-        //   width: 100%;
-        //   text-align: center;
-        // }
+        
       }
     }
     main {
       grid-row: 2;
+      grid-column: 1;
       h1,h2,h3,h4,h5 {
         padding: 1rem 0.3rem 0 0;
       }
@@ -416,6 +411,7 @@ body {
     footer#top {
       @mixin coloring_header;
       grid-row: 3;
+      grid-column: 1;
       text-align: center;
       @mixin font_theme;
       p#cp {
@@ -461,23 +457,46 @@ body {
       }
     }
     @media only screen and (max-width: $width) {
-
+      * {
+      }
       main {
         display: grid;
         grid-template-rows: auto auto auto;
         grid-template-columns: auto;
-        width: 95%;
-        font-size:80%;
+        width: auto;
+        width-max: 90vw;
+        margin: 0 auto;
+        font-size: 80%;
         padding: 0 1rem;
-        pre code {
-          font-size: 85%;
+
+        word-break: break-all;
+        overflow-wrap: normal;
+
+        code {
+          // max-width: 50vw;
+          word-break: break-all;
+          overflow-wrap: normal;
+          white-space: pre-wrap;
         }
+        pre {
+          overflow: scroll;
+          max-width: 90vw;
+          margin: inherit auto;
+          code {
+            font-size: 85%;
+            white-space: pre;
+            background-color: rgba(0,0,0,0);
+          }
+        }
+        // .mjx-math {
+        //   // white-space: pre-wrap;
+        //   display: none;
+        // }
 
         article#main {
           grid-row: 1;
           grid-column: 1;
           padding: 0;
-          overflow: hidden;
           header {
             h1 {
               font-size: 1.6rem;
