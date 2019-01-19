@@ -2,7 +2,7 @@
         {{- partial "info.html" . -}}
       </main>
       <footer id="top">
-        <p id="cp">copyright © 2018 sk0</p>
+        <p id="cp">copyright © {{ .Site.LastChange.Year }} {{ .Site.Params.Author }}</p>
         <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
       </footer>
     </div>

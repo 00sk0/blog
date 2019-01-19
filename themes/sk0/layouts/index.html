@@ -3,12 +3,7 @@
 
 <article id="main">
     <header>
-      <h1>
-        {{if ne (lower .Title) (lower .Section)}}
-        {{if eq .Section "tags"}}Tags: {{else if eq .Section "categories"}}Categories: {{end}}
-        {{.Title}}
-        {{else}}{{.Title}}{{end}}
-      </h1>
+      <h1>{{- .Title -}}</h1>
     </header>
     <div id="article_list">
       {{range (.Paginate (where .Data.Pages "Type" "posts") 10).Pages}}

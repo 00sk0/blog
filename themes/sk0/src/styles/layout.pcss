@@ -385,6 +385,7 @@ body {
         grid-template-rows: auto;
         grid-template-columns: 1fr calc(1.4rem * 5) 1fr;
         margin-top: 3.5rem;
+        margin-bottom: 2.5rem;
         #next {
           @mixin navdiv;
           grid-row: 1;
@@ -460,15 +461,22 @@ body {
       }
     }
     @media only screen and (max-width: $width) {
+
       main {
         display: grid;
         grid-template-rows: auto auto auto;
         grid-template-columns: auto;
         width: 95%;
-        // font-size:70%;
+        font-size:80%;
         article#main {
           grid-row: 1;
           grid-column: 1;
+          padding: 0;
+          header {
+            h1 {
+              font-size: 1.6rem;
+            }
+          }
         }
         #information {
           border-top: double 0.5rem $color_hr;
