@@ -258,7 +258,7 @@ body #wrap {
 body #wrap header#top {
       color: #fff;
       background-color: hsl(150, 30%, 60%);
-      grid-rows: 1;
+      grid-row: 1;
       border-bottom: solid 0.2rem hsl(210, 35%, 85%);
       margin-bottom: 0.95rem;
       position: relative;
@@ -351,7 +351,7 @@ body #wrap header#top nav#site ul li a:hover {
                 text-decoration: underline;
               }
 body #wrap main {
-      grid-rows: 2;
+      grid-row: 2;
       margin: 0 auto 0;
       width: 85%;
       max-width: 1000px;
@@ -660,7 +660,7 @@ body #wrap main nav#adjacent_list #prev p a:after {
 body #wrap footer#top {
       color: #fff;
       background-color: hsl(150, 30%, 60%);
-      grid-rows: 3;
+      grid-row: 3;
       text-align: center;
       font-family: 'ZCOOL KuaiLe', cursive;
       background-color: hsl(150, 30%, 60%);
@@ -730,11 +730,17 @@ body #wrap footer#top:after {
         grid-template-columns: auto;
         width: 95%;
         font-size:80%;
+        padding: 0 1rem;
       }
+        body #wrap main pre code {
+          font-size: 85%;
+        }
+
         body #wrap main article#main {
           grid-row: 1;
           grid-column: 1;
           padding: 0;
+          overflow: hidden;
         }
             body #wrap main article#main header h1 {
               font-size: 1.6rem;

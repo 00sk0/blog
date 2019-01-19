@@ -76,7 +76,7 @@ body {
 
     header#top {
       @mixin coloring_header;
-      grid-rows: 1;
+      grid-row: 1;
       h1 {
         font-size: 2rem;
         margin-left: 1.5rem;
@@ -142,7 +142,7 @@ body {
       }
     }
     main {
-      grid-rows: 2;
+      grid-row: 2;
       h1,h2,h3,h4,h5 {
         padding: 1rem 0.3rem 0 0;
       }
@@ -415,7 +415,7 @@ body {
     }
     footer#top {
       @mixin coloring_header;
-      grid-rows: 3;
+      grid-row: 3;
       text-align: center;
       @mixin font_theme;
       p#cp {
@@ -468,10 +468,16 @@ body {
         grid-template-columns: auto;
         width: 95%;
         font-size:80%;
+        padding: 0 1rem;
+        pre code {
+          font-size: 85%;
+        }
+
         article#main {
           grid-row: 1;
           grid-column: 1;
           padding: 0;
+          overflow: hidden;
           header {
             h1 {
               font-size: 1.6rem;
