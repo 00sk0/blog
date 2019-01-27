@@ -427,8 +427,11 @@ body #wrap main .footnotes {
         margin-top: 4rem;
       }
 body #wrap main ul {
-        padding-left: 1rem;
+        padding-left: 1.5rem;
       }
+body #wrap main ul ul {
+          padding-left: 1rem;
+        }
 body #wrap main #d_404 {
         font-family: 'ZCOOL KuaiLe', cursive;
         text-align: center;
