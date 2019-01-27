@@ -1,5 +1,5 @@
 ---
-title:      "Atcoder AISing Programming Contest 2019"
+title:      "Atcoder: AISing Programming Contest 2019"
 date:       2019-01-12T22:00:49+09:00
 categories: ["competitive_programming"]
 tags:       ["contest","atcoder"]
