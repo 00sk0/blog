@@ -2,7 +2,7 @@ $text_neg: #fff;
 $color_a_link:    hsl(240, 90%, 70%);
 $color_a_hovered: hsl(300, 65%, 70%);
 $text: #34444c;
-$background:   hsl(150,  5%, 99%);
+$background:   hsl(150,  2%, 99%);
 $color_header:   hsl(150, 30%, 60%);
 $color_accent_to: hsl(290, 55%, 85%);
 $color_accent:  hsl(210, 35%, 85%);;
@@ -212,6 +212,9 @@ body {
         ul {
           padding-left: 1rem;
         }
+      }
+      details {
+        border-bottom: 4px double $color_accent;
       }
       #d_404 {
         @mixin font_theme;

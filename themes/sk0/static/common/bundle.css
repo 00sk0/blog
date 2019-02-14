@@ -237,16 +237,16 @@ template {
  }
 body {
   color: #34444c;
-  background-color: hsl(150,  5%, 99%);
+  background-color: hsl(150,  2%, 99%);
   font-family: "Merriweather Sans", sans-serif;
 }
 body::-moz-selection, body ::-moz-selection {
     background-color: hsla(290, 35%, 70%, 0.75);
-    color: hsl(150,  5%, 99%);
+    color: hsl(150,  2%, 99%);
   }
 body::selection, body ::selection {
     background-color: hsla(290, 35%, 70%, 0.75);
-    color: hsl(150,  5%, 99%);
+    color: hsl(150,  2%, 99%);
   }
 body #background {
   }
@@ -266,11 +266,11 @@ body #wrap header#top {
       position: relative;
     }
 body #wrap header#top::-moz-selection, body #wrap header#top ::-moz-selection {
-    background-color: hsl(150,  5%, 99%);
+    background-color: hsl(150,  2%, 99%);
     color: hsl( 290, 35%, 70%);
   }
 body #wrap header#top::selection, body #wrap header#top ::selection {
-    background-color: hsl(150,  5%, 99%);
+    background-color: hsl(150,  2%, 99%);
     color: hsl( 290, 35%, 70%);
   }
 body #wrap header#top h1 {
@@ -384,11 +384,11 @@ body #wrap main table th {
           border-right: solid 1px hsl(150, 10%, 80%);
         }
 body #wrap main table th::-moz-selection, body #wrap main table th ::-moz-selection {
-    background-color: hsl(150,  5%, 99%);
+    background-color: hsl(150,  2%, 99%);
     color: hsl( 290, 35%, 70%);
   }
 body #wrap main table th::selection, body #wrap main table th ::selection {
-    background-color: hsl(150,  5%, 99%);
+    background-color: hsl(150,  2%, 99%);
     color: hsl( 290, 35%, 70%);
   }
 body #wrap main table th:last-child {
@@ -432,6 +432,9 @@ body #wrap main ul {
 body #wrap main ul ul {
           padding-left: 1rem;
         }
+body #wrap main details {
+        border-bottom: 4px double hsl(210, 35%, 85%);
+      }
 body #wrap main #d_404 {
         font-family: 'ZCOOL KuaiLe', cursive;
         text-align: center;
@@ -668,11 +671,11 @@ body #wrap footer#top {
       position: relative;
     }
 body #wrap footer#top::-moz-selection, body #wrap footer#top ::-moz-selection {
-    background-color: hsl(150,  5%, 99%);
+    background-color: hsl(150,  2%, 99%);
     color: hsl( 290, 35%, 70%);
   }
 body #wrap footer#top::selection, body #wrap footer#top ::selection {
-    background-color: hsl(150,  5%, 99%);
+    background-color: hsl(150,  2%, 99%);
     color: hsl( 290, 35%, 70%);
   }
 body #wrap footer#top p#cp {
