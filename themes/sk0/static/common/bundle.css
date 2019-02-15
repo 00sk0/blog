@@ -261,7 +261,7 @@ body #wrap header#top {
       background-color: hsl(150, 30%, 60%);
       grid-row: 1;
       grid-column: 1;
-      border-bottom: solid 0.2rem hsl(210, 35%, 85%);
+      border-bottom: solid 0.2rem hsl(210, 65%, 85%);
       margin-bottom: 0.95rem;
       position: relative;
     }
@@ -305,7 +305,7 @@ body #wrap header#top:after {
         width: 100%;
         height: calc(100% + 0.3rem);
         bottom: -0.3rem; left: 0;
-        border-bottom: double 0.1rem hsl(210, 35%, 85%);
+        border-bottom: double 0.1rem hsl(210, 65%, 85%);
       }
 body #wrap header#top nav#site {
         padding-right: 1rem;
@@ -417,7 +417,7 @@ body #wrap main .highlight pre {
         font-size: 0.8rem;
       }
 body #wrap main blockquote {
-        border-left: solid 10px hsl(210, 35%, 85%);
+        border-left: solid 10px hsl(210, 65%, 85%);
         padding: 0.5rem 0 0.5rem 1rem;
       }
 body #wrap main blockquote p:last-child {
@@ -433,7 +433,7 @@ body #wrap main ul ul {
           padding-left: 1rem;
         }
 body #wrap main details {
-        border-bottom: 4px double hsl(210, 35%, 85%);
+        border-bottom: 4px double hsl(210, 65%, 85%);
       }
 body #wrap main #d_404 {
         font-family: 'ZCOOL KuaiLe', cursive;
@@ -666,7 +666,7 @@ body #wrap footer#top {
       background-color: hsl(150, 30%, 60%);
       padding: 1rem 0 0.5rem;
 
-      border-top: solid 0.2rem hsl(210, 35%, 85%);
+      border-top: solid 0.2rem hsl(210, 65%, 85%);
       margin-top: 0.95rem;
       position: relative;
     }
@@ -701,7 +701,7 @@ body #wrap footer#top:after {
         width: 100%;
         height: calc(100% + 0.3rem);
         top: -0.3rem; left: 0;
-        border-top: double 0.1rem hsl(210, 35%, 85%);
+        border-top: double 0.1rem hsl(210, 65%, 85%);
       }
 @media only screen and (min-width: 830px) {
       body #wrap main {
