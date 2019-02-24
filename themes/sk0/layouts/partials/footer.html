@@ -10,6 +10,14 @@
       MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
       });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}'
+          }
+        }
+      });
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
   </body>
