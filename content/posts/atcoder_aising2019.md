@@ -36,7 +36,7 @@ https://atcoder.jp/contests/aising2019/submissions/4010742
 
 私の使っているUnionFindのコードはめぐる式準拠．ちなみにBFS/DFSでも解けたらしい．確かに．
 
-
+追記(19/03/04): UnionFindのコードにバグを埋め込んでいた．[この記事](/posts/abc120)で修正．
 
 
 
