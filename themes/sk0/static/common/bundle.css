@@ -353,12 +353,9 @@ body #wrap main {
 body #wrap main h1, body #wrap main h2, body #wrap main h3, body #wrap main h4, body #wrap main h5 {
         padding: 1rem 0.3rem 0 0;
       }
-body #wrap main h1 {
-        font-size: 175%;
-      }
-body #wrap main h2, body #wrap main h3, body #wrap main h4, body #wrap main h5 {
-        font-size: 150%;
-      }
+body #wrap main h1 { font-size: 210% }
+body #wrap main h2 { font-size: 150% }
+body #wrap main h3 { font-size: 125% }
 body #wrap main a:link, body #wrap main a:visited {
           color: hsl(240, 90%, 70%);
         }
