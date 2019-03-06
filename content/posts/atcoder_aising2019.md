@@ -6,7 +6,7 @@ tags:       ["contest","atcoder"]
 draft:      false
 ---
 
-ROMっていた．D問題の解説がよく分からない人になっている．
+ROMっていた．D問題の解説がよく分からない．
 
 <!--more-->
 
@@ -21,8 +21,6 @@ https://atcoder.jp/contests/aising2019/submissions/4010740
 https://atcoder.jp/contests/aising2019/submissions/4010741
 
 問題文の通りに各問題の点数を「a以下」「a+1以上b以下」「b+1以上」に分類する（個数を数えればよい）．各コンテストではこの3種類が揃わなければならないから，これらの個数のminを取ればよい．
-
-「できるだけ多く……」って書いてあるのでこわかったが素直にやるだけで済む問題だった．
 
 # C. Alternating Path
 
