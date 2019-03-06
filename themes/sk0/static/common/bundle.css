@@ -430,7 +430,7 @@ body #wrap main ul ul {
           padding-left: 1rem;
         }
 body #wrap main details {
-        border-bottom: 4px double hsl(210, 65%, 85%);
+        /* border-bottom: 4px double $color_accent;*/
       }
 body #wrap main #d_404 {
         font-family: 'ZCOOL KuaiLe', cursive;
