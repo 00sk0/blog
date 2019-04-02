@@ -6,8 +6,6 @@ tags:       ["contest","atcoder"]
 draft:      false
 ---
 
-恒例の不参加．
-
 # A. Anti-Adjacency
 
 選ぶ数の最大値をなるべく小さくしたいことから，1から1つ飛ばしで数を選んでいくのが最適．このとき$k$個目$(k=1,...)$の数は$k$番目の正奇数，すなわち$2k-1$であるから，これと$n$との大小を比較する．https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220931

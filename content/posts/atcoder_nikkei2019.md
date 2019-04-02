@@ -6,10 +6,6 @@ tags:       ["contest","atcoder"]
 draft:      false
 ---
 
-コンテストに出るのは難しい（睡眠時間を調整しなければならない！）．不参加．
-
-<!--more-->
-
 # A. Subscribers
 
 難しい．https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889
