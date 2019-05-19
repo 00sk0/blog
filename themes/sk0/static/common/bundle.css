@@ -356,6 +356,7 @@ body #wrap main h1, body #wrap main h2, body #wrap main h3, body #wrap main h4, 
 body #wrap main h1 { font-size: 210% }
 body #wrap main h2 { font-size: 150% }
 body #wrap main h3 { font-size: 125% }
+/* word-break: break-all;*/
 body #wrap main a:link, body #wrap main a:visited {
           color: hsl(240, 90%, 70%);
         }
@@ -705,17 +706,18 @@ body #wrap footer#top:after {
         display: grid;
         grid-template-rows: -webkit-min-content;
         grid-template-rows: min-content;
-        grid-template-columns:  70.5% 1fr;
+        /* grid-template-columns: 70.5% 1fr;*/
+        grid-template-columns: 1fr 270px;
         min-width: 800px;
       }
         body #wrap main article#main {
           grid-row: 1;
           grid-column: 1;
+          /* overflow: hidden;*/
         }
         body #wrap main #information {
           grid-row: 1;
           grid-column: 2;
-          max-width: 300px;
           font-size: 90%;
         }
     }

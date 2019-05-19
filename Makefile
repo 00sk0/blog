@@ -3,13 +3,13 @@ default:
 	make serve
 
 serve:
-	make serve_css & make serve_hugo
+	make serve_theme & make serve_hugo
 
-serve_css:
+serve_theme:
 	npm run watch --prefix themes/sk0
 
 serve_hugo:
-	hugo server -D
+	hugo server -D --disableFastRender 
 
 clean:
 	rm -r public
