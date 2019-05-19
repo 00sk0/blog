@@ -145,6 +145,7 @@ body {
       h2 { font-size: 150% }
       h3 { font-size: 125% }
       a {
+        // word-break: break-all;
         &:link, &:visited {
           color: $color_a_link;
         }
@@ -445,16 +446,17 @@ body {
       main {
         display: grid;
         grid-template-rows: min-content;
-        grid-template-columns:  70.5% 1fr;
+        // grid-template-columns: 70.5% 1fr;
+        grid-template-columns: 1fr 270px;
         min-width: 800px;
         article#main {
           grid-row: 1;
           grid-column: 1;
+          // overflow: hidden;
         }
         #information {
           grid-row: 1;
           grid-column: 2;
-          max-width: 300px;
           font-size: 90%;
         }
       }
