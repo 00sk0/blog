@@ -8,17 +8,17 @@ draft:      false
 
 # A. Anti-Adjacency
 
-選ぶ数の最大値をなるべく小さくしたいことから，1から1つ飛ばしで数を選んでいくのが最適．このとき$k$個目$(k=1,...)$の数は$k$番目の正奇数，すなわち$2k-1$であるから，これと$n$との大小を比較する．https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220931
+選ぶ数の最大値をなるべく小さくしたいことから，1から1つ飛ばしで数を選んでいくのが最適．このとき$k$個目$(k=1,...)$の数は$k$番目の正奇数，すなわち$2k-1$であるから，これと$n$との大小を比較する． https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220931
 
 # B. Path
 
-問題文の処理をそのまま実装するDFSを書いた．道に番号を振ってそれぞれの道を通ったかを配列で記録しておけば，3回の移動で「すべての道を」「1回ずつ」通ったかは迷いなく判断可能．https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220932
+問題文の処理をそのまま実装するDFSを書いた．道に番号を振ってそれぞれの道を通ったかを配列で記録しておけば，3回の移動で「すべての道を」「1回ずつ」通ったかは迷いなく判断可能． https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220932
 
 editorialの解法は一応紙に書いて確かめるとそれっぽいのだけど洩れを作りそうで怖い．
 
 # C. When I hit my pocket...
 
-こういう操作の特性を考える系の問題は何も浮かばないことが多い気がする．実験をした．https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220933
+こういう操作の特性を考える系の問題は何も浮かばないことが多い気がする．実験をした． https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220933
 
 本文中にある操作を上からP,Q,Rとする．円を持っていても仕方がないので操作Q,Rの数は同数．すると例えば操作列は`PPPQRPPQQRRP...`のようになるが，`P...PQR...QR`と整列して構わない．このとき`P`の数を$p$，`QR`の数を$q$とすると，$p+2q=k$．
 このときのスコアは$p+1+(b-a)q$ $= (k-2q)+1+(b-a)q$ $= (b-a-2)q+k+1$．
@@ -76,7 +76,7 @@ $q$の係数が負または0，すなわち$b-a \le 2$の場合は$q$が少な�
 $$dp[i+1][K] \gets \min_{J \in P(K)} \\{ dp[i][J] + f_J (a[i]) \\}$$
 
 となる．配るDPとして解釈したほうが先の記述に合っているが，配るDPを式で書くときの慣例がよくわからず．
-計算量は$K$が5通りなので$O(L)$．考察さえ済めばかなり綺麗に書ける．https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4262826
+計算量は$K$が5通りなので$O(L)$．考察さえ済めばかなり綺麗に書ける． https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4262826
 
 あまりDPを知らないので説明自体はそんなにできないが，遷移のために参照すべき情報が「前の番地の区間種別」だけであるからそれが等しい状態を一つに纏めてよい，ということなのだろうか．
 また参考文献2にもあるように，遷移関係をオートマトンと見て現在の状態を保持するDPをしていると考えると，確かにこのような例は前にも見た気がする．例えば[Educational Codeforces #57 D問題](https://00sk0.github.io/blog/posts/cf_edu_057/)なんかも文字列の組み立て過程を状態として扱っているが，確かにDFAと意識することができそう．答えの候補は$dp[$受理状態$]$．

@@ -10,13 +10,13 @@ draft:      false
 
 # [A. Find Divisible](https://codeforces.com/contest/1096/problem/A)
 
-難しかった．https://codeforces.com/contest/1096/submission/47657942
+難しかった． https://codeforces.com/contest/1096/submission/47657942
 
 とりあえず$x=l,l+1,...$と固定することにすると，$y$の候補は$y=2x,3x,...$となる．ここで$y$は$[l,r]$内に収めたいことから$y$は最小値を取るべき，すなわち$y=2x$とするべきだと分かる．すると候補は$x$の値に対応して$(x,y)=(l,2l),(l+1,2(l+1)),...$となるが，同様に$y$は最小であってほしいから$(x,y)=(l,2l)$を選べばよい．
 
 # [B. Substring Removal](https://codeforces.com/contest/1096/problem/B)
 
-AtCoderの64bit環境に慣れきってしまい，オーバーフローが起きていることに気づくまでに30分+4WAほど空費（+1WA: modの取り忘れ）．https://codeforces.com/contest/1096/submission/47658038
+AtCoderの64bit環境に慣れきってしまい，オーバーフローが起きていることに気づくまでに30分+4WAほど空費（+1WA: modの取り忘れ）． https://codeforces.com/contest/1096/submission/47658038
 
 <!-- 連続区間を削除するということは左からl文字と右からr文字だけ残すということ． -->
 隣り合う同じ文字で組を作ったときに（例: abbaaならa,bb,aa）組が3つ以上できる場合，両端以外の組は必ず消去しなければならないことに注意（a,b,a,b,aaのような場合でも中央のaだけ残して両隣のbを消すような芸当はできない）．そこで両端の組の文字および個数を調べておく．
@@ -62,7 +62,7 @@ AtCoderの64bit環境に慣れきってしまい，オーバーフローが起�
 
 # [C. Polygon for the Angle](https://codeforces.com/contest/1096/problem/C)
 
-本番は場合分けに失敗した導出方法[^a]だったがACではあった．https://codeforces.com/contest/1096/submission/47658098
+本番は場合分けに失敗した導出方法[^a]だったがACではあった． https://codeforces.com/contest/1096/submission/47658098
 
 入力が$d$，答えが正$n$角形であるとする．中心を$O$，頂点を時計回りに$0,...,n-1$とする．いま対称性より3頂点$(a,b,c)$を$(0,j,k) (0 \lt j \lt k \lt n)$と選ぶ．
 
@@ -85,7 +85,7 @@ AtCoderの64bit環境に慣れきってしまい，オーバーフローが起�
 
 ## 解法(editorial)
 
-$dp[i][j] := $「文字列の左から$i$文字目までにおいて，"hard"の$j$文字目まで作ってしまっている（$j=0$のときは空文字列とする）ときの最小コスト」とする．すると求める値は$\min_{i \in [0,3]} dp[n][i]$とできる．https://codeforces.com/contest/1096/submission/47816104
+$dp[i][j] := $「文字列の左から$i$文字目までにおいて，"hard"の$j$文字目まで作ってしまっている（$j=0$のときは空文字列とする）ときの最小コスト」とする．すると求める値は$\min_{i \in [0,3]} dp[n][i]$とできる． https://codeforces.com/contest/1096/submission/47816104
 
 こうして見ると文字を組み立てるときと結構同じ気がする．とするとなぜ解けなかったか気になるが，「文字を作らない」という条件の言い換えが上手くできなかったことが失敗要因かもしれない（文字を作るときのように途中状態に分解して考えればよかった，のかしら）．
 

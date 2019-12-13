@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", function(_e) {
 		if (e.innerHTML.match(/^https?:\/\//)) {
 			e.style.wordBreak = "break-all";
 		}
-		// console.log(e);
+	});
+	const ps = Array.from(document.getElementsByTagName("p"));
+	ps.forEach(p => {
+		p.innerHTML = p.innerHTML.replace(/．\ /, "．");
 	});
 });
 

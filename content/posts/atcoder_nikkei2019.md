@@ -8,17 +8,17 @@ draft:      false
 
 # A. Subscribers
 
-難しい．https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889
+難しい． https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889
 
 $m=|X \cap Y|$の最大値および最小値を求める問題．最大値が$\min \\{|X|,|Y|\\}$なのはまあわかる．最小値には「どちらも購読していない人たちが$0$人以上でなければならない」という条件が入る：$|X \cup Y|=|X|+|Y|-|X \cap Y|=a+b-m$より，先の人数は$n-(a+b-m) \ge 0$，移項して$m \ge a + b - n$が必要．加えて$m \ge 0$であるから，連立させて$m \ge \max \\{(a+b-n), 0\\}$となる．
 
 # B. Touitsu
 
-最初なんとなくどれかに揃えれば良さそうな気がしたがそんなことは無かった（サンプルが優しい）．$a,b,c$の$i$文字目について多数決を採ればよい．どれも異なればコストは+2, 1ペアだけあれば+1, すべて揃っていれば+0．https://atcoder.jp/contests/nikkei2019-qual/submissions/4112885
+最初なんとなくどれかに揃えれば良さそうな気がしたがそんなことは無かった（サンプルが優しい）．$a,b,c$の$i$文字目について多数決を採ればよい．どれも異なればコストは+2, 1ペアだけあれば+1, すべて揃っていれば+0． https://atcoder.jp/contests/nikkei2019-qual/submissions/4112885
 
 # C. Diffrent Strokes
 
-前にも見た気がする．https://atcoder.jp/contests/nikkei2019-qual/submissions/4112886
+前にも見た気がする． https://atcoder.jp/contests/nikkei2019-qual/submissions/4112886
 
 高橋くんが目標を実現するための手段としては「自分のスコアを大きくする」以外に「青木さんのスコアを小さくする」もある．ここから考えると，高橋くんが$a[i]$番目を取ると青木さんは$b[i]$を取れないから高橋くんは$a[i]+b[i]$だけ得すると考えられる．よって$a[i]+b[i]$をソートし，これが大きい順に$a[i]$を取ればよい．青木さん視点でも同様に考えれば$b[i]+a[i]$の大きい順に取りたいこととなる．したがって先のソート結果から二人して大きい順に取って行き，高橋くんの手番ではスコアに+$a[i]$を，青木さんの手番では-$b[i]$していけばよい．
 
@@ -62,7 +62,7 @@ https://atcoder.jp/contests/nikkei2019-qual/submissions/4112887
 今回のようなDAGの最長経路の求め方を検索すると，トポロジカルソートを利用したものが出てくる．[GeeksforGeeks](https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/)によると，トポロジカルソート順に頂点を調べ，そこを始点とする辺の終点について距離を更新していけばよいとのこと．理由が書かれていないので推測：通り過ぎた頂点に対して新たに最長経路が見つかるとそこから到達する頂点すべてに対して再計算が必要になるが，トポロジカルソート順だと一度通り過ぎた点はもう使われないために再計算が起こらないから？ https://atcoder.jp/contests/nikkei2019-qual/submissions/4113005
 
 ところで提出を眺めていると上位陣にこれをBFSで求めている解答が散見された[^d11]．
-BFSのアルゴリズムを思い出すと，BFS順で最後に点$v$に到達するときが根から$v$までの最長経路となる（最短経路から順に見つかっていくので）．したがってBFS順で最後になるまでは無視し，最後になったらようやく遷移をすればよい．最後かどうかは$v$に到達する辺の個数を数えておけば判断可能で，このときに親ノードを記録し，遷移をしていく．重みが一定の場合にしか使えなそうだが考え方として面白かった．https://atcoder.jp/contests/nikkei2019-qual/submissions/4113002
+BFSのアルゴリズムを思い出すと，BFS順で最後に点$v$に到達するときが根から$v$までの最長経路となる（最短経路から順に見つかっていくので）．したがってBFS順で最後になるまでは無視し，最後になったらようやく遷移をすればよい．最後かどうかは$v$に到達する辺の個数を数えておけば判断可能で，このときに親ノードを記録し，遷移をしていく．重みが一定の場合にしか使えなそうだが考え方として面白かった． https://atcoder.jp/contests/nikkei2019-qual/submissions/4113002
 
 [^d11]: https://atcoder.jp/contests/nikkei2019-qual/submissions/4100659 など．
 

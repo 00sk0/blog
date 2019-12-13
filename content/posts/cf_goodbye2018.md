@@ -12,7 +12,7 @@ draft:      false
 
 # [A. New Year and the Christmas Ornament](https://codeforces.com/contest/1091/problem/A)
 
-制約が小さいのでyellow ornamentsの個数で全探索する．https://codeforces.com/contest/1091/submission/47768338
+制約が小さいのでyellow ornamentsの個数で全探索する． https://codeforces.com/contest/1091/submission/47768338
 
 ## $O(1)$解(editorial)
 
@@ -20,7 +20,7 @@ draft:      false
 
 # [B. New Year and the Treasure Geolocation](https://codeforces.com/contest/1091/problem/B)
 
-最初見たときすぐに解法が浮かばなかったのは反省．https://codeforces.com/contest/1091/submission/47768348
+最初見たときすぐに解法が浮かばなかったのは反省． https://codeforces.com/contest/1091/submission/47768348
 
 obeliskとclueの対応をすべて列挙すると間に合わないが，最初のobeliskと対応するclueだけを全通り試せばよい．するとtreasureの座標が決まるため，残りの各obeliskについてその座標をtreasureの座標から引くことで対応するclueを求めることが可能．clueをMapに入れて存在を確かめることで$O(n^2 logn)$で求解可能．
 
@@ -30,7 +30,7 @@ obeliskの座標と対応するclueの座標を足すとtreasureの座標とな�
 
 # [C. New Year and the Sphere Transmission](https://codeforces.com/contest/1091/problem/C)
 
-30分は掛け過ぎだった．https://codeforces.com/contest/1091/submission/47768360
+30分は掛け過ぎだった． https://codeforces.com/contest/1091/submission/47768360
 
 $k$が$n$の約数でないときは何周もしてすべての点を通り[^hoge]，和は$1+...+n=\frac{n(n+1)}{2}$となる．
 $k$が$n$の約数であるときは1周で終わり[^fugapiyo]，通る点は$1+0k,1+1k,1+2k,...,1+(m-1)k$となる．ただし$m$は$1+mk=n+1$，すなわちちょうど一周するときの値．これらの合計は$m=\frac{n}{k}$より$\sum_{i=0}^{n/k-1} (1+ik)=\frac{n(n+2-k)} {2k}$となる（数学が出来ないのでWolframで計算した）．

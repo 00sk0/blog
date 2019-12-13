@@ -10,7 +10,7 @@ Cで嵌ってしまった．
 
 # A. Consecutive Integers
 
-区間を覆う問題は何度か解いたので記憶していた．図を描けばわかりやすい．https://atcoder.jp/contests/diverta2019/submissions/5375209
+区間を覆う問題は何度か解いたので記憶していた．図を描けばわかりやすい． https://atcoder.jp/contests/diverta2019/submissions/5375209
 
 選ぶ連続した整数を区間と見る．例えば$N=8,K=3$のとき，
 `ooo.....`
@@ -18,7 +18,7 @@ Cで嵌ってしまった．
 
 # B. RGB Boxes
 
-箱がそれぞれ$R,G,B$個だと誤読して3分くらい浪費．実際は箱の中のボールの個数が$R,G,B$個．https://atcoder.jp/contests/diverta2019/submissions/5375264
+箱がそれぞれ$R,G,B$個だと誤読して3分くらい浪費．実際は箱の中のボールの個数が$R,G,B$個． https://atcoder.jp/contests/diverta2019/submissions/5375264
 
 各色について買う箱の個数を決め打ちすることを考える：例えば赤ならそれぞれ$0$個以上$\lfloor N/R \rfloor$個以下[^1]（$G,B$も同様）．これだと$O(N^{3})$であり間に合わないが，2種類だけ決めれば残りに必要な箱の個数は求まる：箱の個数をそれぞれ$r,g,b$とおくと$b=\frac {N-(rR+gG)} {B}$．これが割り切れかつ先の範囲内でなければならない．この方針なら$O(N^2)$であるから間に合う．
 
@@ -28,7 +28,7 @@ Cで嵌ってしまった．
 
 # C. AB Substrings
 
-コーナーケースに引っ掛かっていると思って色々試行錯誤した挙句元々の解法が間違っていた．https://atcoder.jp/contests/diverta2019/submissions/5376372
+コーナーケースに引っ掛かっていると思って色々試行錯誤した挙句元々の解法が間違っていた． https://atcoder.jp/contests/diverta2019/submissions/5376372
 
 まず各文字列の中の`AB`の個数を数える．次に末尾に`A`や，先頭に`B`があるものを組み合わせて`AB`が作れることに注意する（文字列の中の`AB`とは重ならないので安心）．両方を兼ね備える文字列に注意：パターン`BA`とおく．そうでなく末尾に`A`，先頭に`B`があるものをそれぞれパターン`XA`, `BX`とおく．これらの組み合わせ方を考えたい（どちらでもないパターンはどう組み合わせても意味が無いので以下無視する）．
 
@@ -51,7 +51,7 @@ Cで嵌ってしまった．
 
 # D. DivRem Number
 
-感触は300点，数学要素も考慮すると簡単目な400点問題な気がする．https://atcoder.jp/contests/diverta2019/submissions/5375505
+感触は300点，数学要素も考慮すると簡単目な400点問題な気がする． https://atcoder.jp/contests/diverta2019/submissions/5375505
 
 500点問題ということで最初数分は難しく考えすぎてしまったが，素直に$N=pm+q$と表示すればよい：$p=\lfloor \frac {N} {m} \rfloor$，$q=N \bmod m$．これらが等しくなるような$m$を求めたい：$N=pm+p=p(m+1)$．よって$N$の約数$d$が分かれば$m$の候補$m = d - 1$が得られる．あとは元々の条件$\lfloor N/m \rfloor = N \bmod m$を確かめればよい（$0$除算にならないように注意）．
 
