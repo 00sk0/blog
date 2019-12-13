@@ -2,7 +2,7 @@
 title:      "Atcoder: みんなのプロコン2019"
 date:       2019-02-09T22:20:24+09:00
 categories: ["competitive_programming"]
-tags:       ["contest","atcoder"]
+tags:       ["contest","atcoder","ocaml"]
 draft:      false
 ---
 

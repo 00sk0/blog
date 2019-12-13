@@ -2,7 +2,7 @@
 title:      "Codeforces Hello 2019"
 date:       2019-01-05T02:50:37+09:00
 categories: ["competitive_programming"]
-tags:       ["contest","codeforces"]
+tags:       ["contest","codeforces","ocaml"]
 draft:      false
 ---
 

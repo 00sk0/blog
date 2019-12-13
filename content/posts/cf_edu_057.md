@@ -2,7 +2,7 @@
 title:      "Educational Codeforces #57"
 date:       2018-12-29T14:52:23+09:00
 categories: ["competitive_programming"]
-tags:       ["codeforces", "contest"]
+tags:       ["codeforces", "contest","ocaml"]
 draft:      false
 ---
 

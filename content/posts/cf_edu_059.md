@@ -2,7 +2,7 @@
 title:      "Educational Codeforces #59"
 date:       2019-01-27T03:35:38+09:00
 categories: ["competitive_programming"]
-tags:       ["contest","codeforces"]
+tags:       ["contest","codeforces","ocaml"]
 draft:      false
 ---
 
@@ -95,7 +95,7 @@ $x = \gcd \\{ \gcd \\{bx_i\\}, \gcd \\{by_i\\} \\}$[^d3.5]．
 
 サンプルを作るのが面倒だったのでお試しを置いておく[^d4]．DFSで死ぬ例．
 
-[^d4]: 
+[^d4]:
 	```
 	12
 	E00

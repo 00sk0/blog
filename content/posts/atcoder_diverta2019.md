@@ -2,7 +2,7 @@
 title:      "AtCoder: diverta 2019 Programming Contest"
 date:       2019-05-12T23:40:34+09:00
 categories: ["competitive_programming"]
-tags:       ["contest","atcoder"]
+tags:       ["contest","atcoder","ocaml"]
 draft:      false
 ---
 
@@ -41,7 +41,7 @@ Cで嵌ってしまった．
 	* さらに両側にそれぞれ`XA`, `BX`を追加できる
 		* `XA`, `BX`のそれぞれについて，それが1個以上あれば`AB`が1個増える（`XA`, `BX`も1個減る）．これらは破壊的に更新されたとする．
 	* 余った`XA`, `BX`同士を組み合わせて`XABX...XABX`を作る：`AB`は$\min \\{\text{XA}, \text{BX}\\}$個
-	* 従って$\text{AB} + \text{BA} - 1 + \min \\{\text{XA}, \text{BX}\\}$ 
+	* 従って$\text{AB} + \text{BA} - 1 + \min \\{\text{XA}, \text{BX}\\}$
 * `BA`がないとき：
 	* `XA`, `BX`の組み合わせのみ．従って$\text{AB} + \min \\{\text{XA}, \text{BX}\\}$
 

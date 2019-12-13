@@ -2,7 +2,7 @@
 title:      "Atcoder: Nikkei Programming Contest 2019"
 date:       2019-01-27T22:37:02+09:00
 categories: ["competitive_programming"]
-tags:       ["contest","atcoder"]
+tags:       ["contest","atcoder","ocaml"]
 draft:      false
 ---
 

@@ -2,7 +2,7 @@
 title:      "転倒数とBinary Indexed Tree"
 date:       2018-12-25T14:32:46+09:00
 categories: ["competitive_programming"]
-tags:       ["algorithm"]
+tags:       ["algorithm","ocaml"]
 draft:      false
 ---
 

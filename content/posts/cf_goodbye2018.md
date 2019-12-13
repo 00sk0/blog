@@ -2,7 +2,7 @@
 title:      "Codeforces Good Bye 2018"
 date:       2018-12-31T01:57:05+09:00
 categories: ["competitive_programming"]
-tags:       ["contest","codeforces"]
+tags:       ["contest","codeforces","ocaml"]
 draft:      false
 ---
 
@@ -52,7 +52,7 @@ https://codeforces.com/contest/1091/submission/47768364
 何も分からないので素直に実装して実験するとn=8まではまあまあの時間で計算可能．部分列として同じ数列が出現することがあるので，それらの個数をまとめてみる．これを並べて眺めていると「同じ個数の数列がいくつあるか」もまとめてみたくなるのでそうする．すると次のようになる（次図は1個から）：
 
 * `n=3: [ 3,  3]`
-* `n=4: [ 4,  8,  12]` 
+* `n=4: [ 4,  8,  12]`
 * `n=5: [ 5, 15,  40,  60,]`
 * `n=6: [ 6, 24,  90, 240,  360]`
 * `n=7: [ 7, 35, 168, 630, 1680, 2520]`
