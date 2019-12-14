@@ -12,7 +12,7 @@ $color_selection:   hsl( 290, 35%, 70%);
 
 $color_code_back: hsl(150, 30%, 93%);
 
-$width: 830px;
+$width: 950px; // 830
 
 @define-mixin coloring_default {
   color: $text;
@@ -183,13 +183,15 @@ body {
         background-color: $color_code_back;
         // font-size: 0.9rem;
       }
-      pre code {
-        display: block;
-        padding: 0.4rem;
-        vertical-align: middle;
-        margin-left: 0.25rem;
-        margin-right:0.25rem;
-        background: none;
+      pre {
+        code {
+          display: block;
+          padding: 0.4rem;
+          margin-left: 0.25rem;
+          margin-right:0.25rem;
+          background: none;
+          width: 300px;
+        }
       }
       .highlight pre {
         // background-color: rgba(0,0,0,0) !important;
@@ -473,7 +475,7 @@ body {
         width: auto;
         // max-width: 90vw;
         margin: 0 auto;
-        font-size: 80%;
+        font-size: 90%;
         padding: 0 1rem;
 
         word-break: break-all;
@@ -486,11 +488,11 @@ body {
           white-space: pre-wrap;
         }
         pre {
-          overflow: scroll;
+          overflow-x: scroll;
           max-width: 90vw;
           margin: inherit auto;
           code {
-            font-size: 85%;
+            font-size: 100%;
             white-space: pre;
             background-color: rgba(0,0,0,0);
           }

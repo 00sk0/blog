@@ -235,6 +235,7 @@ template {
 [hidden] {
    display: none !important;
  }
+/* 830*/
 body {
   color: #34444c;
   background-color: hsl(150,  2%, 99%);
@@ -403,13 +404,13 @@ body #wrap main code {
         /* font-size: 0.9rem;*/
       }
 body #wrap main pre code {
-        display: block;
-        padding: 0.4rem;
-        vertical-align: middle;
-        margin-left: 0.25rem;
-        margin-right:0.25rem;
-        background: none;
-      }
+          display: block;
+          padding: 0.4rem;
+          margin-left: 0.25rem;
+          margin-right:0.25rem;
+          background: none;
+          width: 300px;
+        }
 body #wrap main .highlight pre {
         /* background-color: rgba(0,0,0,0) !important;*/
         background-color: hsl(230, 10%, 15%);
@@ -530,7 +531,7 @@ body #wrap main #information aside#brief_about {
           text-align: center;
           margin-top: 1rem;
         }
-@media only screen and (max-width: 830px) {
+@media only screen and (max-width: 950px) {
 body #wrap main #information aside#brief_about {
             margin-top: 3rem
         }
@@ -539,7 +540,7 @@ body #wrap main #information nav {
           border-top: solid 1px hsl(150, 10%, 80%);
           padding-top: 1rem;
         }
-@media only screen and (max-width: 830px) {
+@media only screen and (max-width: 950px) {
 body #wrap main #information nav {
             text-align: center;
         }
@@ -568,7 +569,7 @@ body #wrap main #information nav ul {
             padding-left: 0.75rem;
             list-style-type: none;
           }
-@media only screen and (max-width: 830px) {
+@media only screen and (max-width: 950px) {
 body #wrap main #information nav ul#info_categories, body #wrap main #information nav ul#info_tags {
               margin-left: 0.75rem;
               padding-left: 0
@@ -703,7 +704,7 @@ body #wrap footer#top:after {
         top: -0.3rem; left: 0;
         border-top: double 0.1rem hsl(210, 65%, 85%);
       }
-@media only screen and (min-width: 830px) {
+@media only screen and (min-width: 950px) {
       body #wrap main {
         display: grid;
         grid-template-rows: -webkit-min-content;
@@ -723,7 +724,7 @@ body #wrap footer#top:after {
           font-size: 90%;
         }
     }
-@media only screen and (max-width: 830px) {
+@media only screen and (max-width: 950px) {
       body #wrap * {
       }
       body #wrap main {
@@ -733,7 +734,7 @@ body #wrap footer#top:after {
         width: auto;
         /* max-width: 90vw;*/
         margin: 0 auto;
-        font-size: 80%;
+        font-size: 90%;
         padding: 0 1rem;
 
         word-break: break-all;
@@ -749,12 +750,12 @@ body #wrap footer#top:after {
           white-space: pre-wrap;
         }
         body #wrap main pre {
-          overflow: scroll;
+          overflow-x: scroll;
           max-width: 90vw;
           margin: inherit auto;
         }
           body #wrap main pre code {
-            font-size: 85%;
+            font-size: 100%;
             white-space: pre;
             background-color: rgba(0,0,0,0);
           }
