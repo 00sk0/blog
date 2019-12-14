@@ -29,6 +29,6 @@ draft:      false
 - GIT_TOKENを追加．scopeはpublic repositoryを見れるやつにした
 - パイプラインを接続
 - 先のパイプラインはデプロイ成功によるgh-pagesの更新でも発火してしまう
-	- `could not read wercker yml while getting config: No wercker.yml found`と言われた（それはそう）
+	- `could not read wercker yml while ` `getting config: No wercker.yml found`と言われた（それはそう）
 	- Workflowsからbuildを選び，"When new code is pushed On branch(es)"の\*を消してmasterにする
 

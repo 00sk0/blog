@@ -10,7 +10,7 @@ $color_hr:hsl(150, 10%, 80%);
 $color_selection-a: hsla(290, 35%, 70%, 0.75);
 $color_selection:   hsl( 290, 35%, 70%);
 
-$color_code_back: hsl(150, 30%, 85%);
+$color_code_back: hsl(150, 30%, 93%);
 
 $width: 830px;
 
@@ -132,7 +132,7 @@ body {
         right: 0;
         bottom: -0.2rem;
         margin-right: 0.5rem;
-        
+
       }
     }
     main {
@@ -180,6 +180,7 @@ body {
       code {
         font-family: "Source Code Pro", monospace;
         white-space: pre;
+        background-color: $color_code_back;
         // font-size: 0.9rem;
       }
       pre code {
@@ -188,6 +189,7 @@ body {
         vertical-align: middle;
         margin-left: 0.25rem;
         margin-right:0.25rem;
+        background: none;
       }
       .highlight pre {
         // background-color: rgba(0,0,0,0) !important;

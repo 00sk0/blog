@@ -313,7 +313,7 @@ body #wrap header#top nav#site {
         right: 0;
         bottom: -0.2rem;
         margin-right: 0.5rem;
-        
+
       }
 body #wrap header#top nav#site ul {
           padding-left: 0;
@@ -399,6 +399,7 @@ body #wrap main table td {
 body #wrap main code {
         font-family: "Source Code Pro", monospace;
         white-space: pre;
+        background-color: hsl(150, 30%, 93%);
         /* font-size: 0.9rem;*/
       }
 body #wrap main pre code {
@@ -407,6 +408,7 @@ body #wrap main pre code {
         vertical-align: middle;
         margin-left: 0.25rem;
         margin-right:0.25rem;
+        background: none;
       }
 body #wrap main .highlight pre {
         /* background-color: rgba(0,0,0,0) !important;*/
