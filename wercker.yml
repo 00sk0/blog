@@ -23,8 +23,8 @@ build:
     - install-packages:
       # wercker.yaml not found
       packages: git
-    - arjen/hugo-build@2.7.0:
-      version: "0.50"
+    - arjen/hugo-build@2.10.1:
+      version: "0.58.3"
       config: config.toml
 deploy:
   steps:
