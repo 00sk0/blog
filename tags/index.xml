@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on sk0&#39;s blog</title>
+    <link>https://00sk0.github.io/blog/tags/</link>
+    <description>Recent content in Tags on sk0&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Sun, 19 May 2019 23:57:39 +0900</lastBuildDate>
+    
+	<atom:link href="https://00sk0.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>atcoder</title>
+      <link>https://00sk0.github.io/blog/tags/atcoder/</link>
+      <pubDate>Sun, 19 May 2019 23:57:39 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/atcoder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>contest</title>
+      <link>https://00sk0.github.io/blog/tags/contest/</link>
+      <pubDate>Sun, 19 May 2019 23:57:39 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/contest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ocaml</title>
+      <link>https://00sk0.github.io/blog/tags/ocaml/</link>
+      <pubDate>Sun, 19 May 2019 23:57:39 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/ocaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>codeforces</title>
+      <link>https://00sk0.github.io/blog/tags/codeforces/</link>
+      <pubDate>Wed, 06 Mar 2019 00:50:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/codeforces/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithm</title>
+      <link>https://00sk0.github.io/blog/tags/algorithm/</link>
+      <pubDate>Tue, 25 Dec 2018 14:32:46 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gh-pages</title>
+      <link>https://00sk0.github.io/blog/tags/gh-pages/</link>
+      <pubDate>Mon, 24 Dec 2018 15:13:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/gh-pages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://00sk0.github.io/blog/tags/hugo/</link>
+      <pubDate>Mon, 24 Dec 2018 15:13:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>website</title>
+      <link>https://00sk0.github.io/blog/tags/website/</link>
+      <pubDate>Mon, 24 Dec 2018 15:13:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/website/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wercker</title>
+      <link>https://00sk0.github.io/blog/tags/wercker/</link>
+      <pubDate>Mon, 24 Dec 2018 15:13:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/tags/wercker/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

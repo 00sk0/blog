@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/cf_530/"></link>
+    <title>
+        Codeforces Round #530 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>Codeforces Round #530</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Jan 6, 2019,</time><br> modified:
+                <time>Dec 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/contest">contest</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          
+
+<h1 id="a-snowball">A. Snowball</h1>
+
+<p>問題文<del>ではなくテストケース</del>に書かれている処理をそのまま実装． <a href="https://codeforces.com/contest/1099/submission/48379967">https://codeforces.com/contest/1099/submission/48379967</a></p>
+
+<h1 id="b-squares-and-segments">B. Squares and Segments</h1>
+
+<p><a href="https://codeforces.com/contest/1099/submission/48394492">https://codeforces.com/contest/1099/submission/48394492</a></p>
+
+<p>横幅および縦幅を広げてしまうと必要なSegment数が増えるため，なるべく正方形に収まるようにするのが最適．対称性より横幅$ \ge $縦幅とする．すると横幅は$n$個以上入る正方形の一辺$p$とすればよい<sup class="footnote-ref" id="fnref:b"><a href="#fn:b">1</a></sup>．$p \times p \ge n$より$p \ge \sqrt{n}$となり，$p$は整数であるから$ceil(\sqrt{n})$が最適．縦幅は余り部分も必要であるから$ceil(n / $(横幅)$)$として求まる．</p>
+
+<h2 id="別解-editorial">別解(editorial)</h2>
+
+<p>求めたい値は縦幅と横幅を$p$,$q$としたとき$\min{\{p+q\}}$ s.t. $p \times q \ge n$である．ここで$|q-p| \ge 2$は無駄：例えば$p=3,q=5$のとき15個までしか入らないが，$p=q=4$とすれば$p+q=8$を保ちつつ16個入れることが可能．$p=3,q=6$のときも$p=4,q=5$とすることで2個分得する．これは要するに先の「横幅および縦幅を広げると必要なSegment数が増える」に対応し，気持ちとしては「横幅と縦幅を近づけて正方形に近くしたい」という認識でよい気がする．</p>
+
+<p>従って解は対称性より$(p,q)=(r,r)$または$(r,r+1)$という形に限られる．editorialでは$r=floor(\sqrt{n})$とした後で$(r,r),(r,r+1)$, さらに丸めについても考えて$(r+1,r+1)$も試している．これは正直ややこしいと思った．$r$を$1$から$ceil(\sqrt{n})$まで動かして確かめても$O(\sqrt{n})$で間に合うし，この方針を採っている人が多い印象．</p>
+
+<h1 id="c-postcard">C. Postcard</h1>
+
+<p><a href="https://codeforces.com/contest/1099/submission/48382985">https://codeforces.com/contest/1099/submission/48382985</a></p>
+
+<p>とりあえず記号（とそれとペアの文字）を消去したもの$t$を考える．この文字列は必ず残るため，$|t|$が$k$より大きいとImpossible．等しければそのまま出力．小さければ記号の利用を考える．まず<code>'*'</code>があればこれ1個から任意文字数作ることが可能なため，適当な1つを$k-|t|$文字出して残りの<code>'*'</code>及び<code>'?'</code>を0文字にすればよい．無い場合は<code>'?'</code>を使う：$k-|t|$個以上<code>'?'</code>があればその数だけ文字を出現させればよい．足りなかったらImpossible．</p>
+
+<p>実装が汚くなってしまったこともありWAを出した．記事のために書き直しても汚いままなのですが……．綺麗に書けないかしら．書き直しコードはなるべく非破壊に抑えたかったものの，今回はそれだと書きにくかったので破壊的に．</p>
+
+<p>最初書き直したときに「i番目を見ているとき，<code>'*'</code>がi+2番目にあれば～～」という処理を採用していたのだが，これは先頭が<code>a*</code>などのときに不発になる．</p>
+
+<h1 id="d-sum-in-the-tree">D. Sum in the tree</h1>
+
+<p>疲れからかあまり考察せずにコンテストから離れてしまった．解法は言われると当たり前ではあるものの自力で思いつくのはきつかったように思う． <a href="https://codeforces.com/contest/1099/submission/48399103">https://codeforces.com/contest/1099/submission/48399103</a></p>
+
+<h2 id="解法">解法</h2>
+
+<p>editorialがよく分からなかったので自分流に書き換えてみた．よって誤りがあるかも．</p>
+
+<p>求めるべき値が$\sum a_i$の最小値であるから，$a_i$の値はなるべく増やしたくない．
+まず偶数深さの葉$i$については$a_i$を何にしようが他の頂点に影響しないため，素直に$a_i=0$とできる．</p>
+
+<p>葉でない場合はどうするか．ここで頂点$i$の親を$p$, $i$の子を$c_1,&hellip;,c_k$とする．いま$s_i = s_h + a_i$, $s_{c_j}=s_i+a_{c_j}$である．$\sum a$を最小化したいという要請に合わせて変形すると$a_{c_j} = s_{c_j} - s_i = s_{c_j} - s_h - a_i$．前2項は奇数深さゆえ所与であるから，$a_i$の値を決めれば$a_{c_j}$も決まる，すなわち$a_i$の値に応じ$i$の<strong>すべての子</strong>について値$a_{c_j}$が変化する．$a_i$を1増やすと$a_{c_j}$が1減るから，$\sum a_{c_j}$が$k$減ることとなる．よって$a_i$をできるだけ大きく取って損することはない（$k \lt 1$，すなわち$i$が葉の場合を除くが，これは先に議論した）．
+$a$の各要素は0以上であるから，$a_i$の最大値は$a_{c_j}=0$が現れるときであり，$a_i=\min\{s_{c_j}\}-s_h$となる．構成不可能な場合はこれが0未満になってしまうか否かで判別可能．</p>
+
+<p>気持ちとしては「$a_i$を小さく持ってしまうと，子らが$s_{c_j}$を再現するために各$a_{c_j}$にその分を持たなければならず，$\sum a$が増大する．よって$a_i$で出来るだけ負担してあげる」という感じかしら．</p>
+
+<p>実装はDFSでよい．奇数深さ頂点の場合は$a_i = s_i - s_h$の左辺がすべて所与であるからこの式で求まる．偶数深さ頂点の場合は先に述べた処理をそのまま行えばよい．</p>
+
+<p>もう少し簡潔な考察？：$s_i$が取れる値の範囲に着目すると$[s_h, \min\{s_{c_j}\}]$
+となる．対応する$a_i$の値は$[ 0, \min\{s_{c_j}\} - s_h ]$．先の議論から$a_i$は大きいほうがよいので右端を採用．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:b">横幅,縦幅を$w,h$とする．$w$が$p$未満であるとするとき，$w \ge h$であったから$wh \le ww \le (p-1)^2 \lt n$（$\because$ $p$の定義$(p-1)^2 \lt n \le p^2$）となり$n$個入らない（それはそう）．反対に$w$が$p$より大きいときを考える．$w=p$のときの$h$が$q$であるとすると，$w=p+1$のときの$h$は$q$以下になる（$\because$ $n \le pq$, $n \le (p+1)h$より$q=ceil(n/p)$, $h=ceil(n/(p+1))$）から縦横の差が広がって正方形から遠ざかる．
+ <a class="footnote-return" href="#fnref:b"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

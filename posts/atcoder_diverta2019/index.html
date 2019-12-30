@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/"></link>
+    <title>
+        AtCoder: diverta 2019 Programming Contest - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>AtCoder: diverta 2019 Programming Contest</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>May 12, 2019,</time><br> modified:
+                <time>Dec 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/contest">contest</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          
+
+<p>Cで嵌ってしまった．</p>
+
+<h1 id="a-consecutive-integers">A. Consecutive Integers</h1>
+
+<p>区間を覆う問題は何度か解いたので記憶していた．図を描けばわかりやすい． <a href="https://atcoder.jp/contests/diverta2019/submissions/5375209">https://atcoder.jp/contests/diverta2019/submissions/5375209</a></p>
+
+<p>選ぶ連続した整数を区間と見る．例えば$N=8,K=3$のとき，
+<code>ooo.....</code>
+のようになり，<code>'.'</code>の数だけ区間を右にずらせる．<code>'.'</code>の数は$N-K$であるから，答えは初期位置も含めて$N-K+1$．</p>
+
+<h1 id="b-rgb-boxes">B. RGB Boxes</h1>
+
+<p>箱がそれぞれ$R,G,B$個だと誤読して3分くらい浪費．実際は箱の中のボールの個数が$R,G,B$個． <a href="https://atcoder.jp/contests/diverta2019/submissions/5375264">https://atcoder.jp/contests/diverta2019/submissions/5375264</a></p>
+
+<p>各色について買う箱の個数を決め打ちすることを考える：例えば赤ならそれぞれ$0$個以上$\lfloor N/R \rfloor$個以下<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>（$G,B$も同様）．これだと$O(N^{3})$であり間に合わないが，2種類だけ決めれば残りに必要な箱の個数は求まる：箱の個数をそれぞれ$r,g,b$とおくと$b=\frac {N-(rR+gG)} {B}$．これが割り切れかつ先の範囲内でなければならない．この方針なら$O(N^2)$であるから間に合う．</p>
+
+<p>ところでeditorialがそうしているように$r,g$の上限は$N$でも，$N$の上限の$3000$でもよい（どうせ$b$が負になるため）．</p>
+
+<h1 id="c-ab-substrings">C. AB Substrings</h1>
+
+<p>コーナーケースに引っ掛かっていると思って色々試行錯誤した挙句元々の解法が間違っていた． <a href="https://atcoder.jp/contests/diverta2019/submissions/5376372">https://atcoder.jp/contests/diverta2019/submissions/5376372</a></p>
+
+<p>まず各文字列の中の<code>AB</code>の個数を数える．次に末尾に<code>A</code>や，先頭に<code>B</code>があるものを組み合わせて<code>AB</code>が作れることに注意する（文字列の中の<code>AB</code>とは重ならないので安心）．両方を兼ね備える文字列に注意：パターン<code>BA</code>とおく．そうでなく末尾に<code>A</code>，先頭に<code>B</code>があるものをそれぞれパターン<code>XA</code>, <code>BX</code>とおく．これらの組み合わせ方を考えたい（どちらでもないパターンはどう組み合わせても意味が無いので以下無視する）．</p>
+
+<p>はじめば<code>XA</code>と<code>BX</code>，および<code>BA</code>をそれぞれ独立に組み合わせた後で合体させればよいと考えていたが，誤りである：例えば<code>BA=3</code>,<code>XA=2</code>,<code>BX=2</code>のとき，<code>XABX+XABX+BABABA</code>となって5個であるが，最適なのは<code>XABX+XA+BABABA+BX</code>の6個である．このように<code>BA...BA</code>の先頭および末尾にある<code>B,A</code>を活用してそこに<code>XA</code>, <code>BX</code>を組み合わせたほうが得をする．</p>
+
+<p>以上より：</p>
+
+<ul>
+<li><code>BA</code>があるとき：
+
+<ul>
+<li><code>BA...BA</code>の中に<code>AB</code>は$\text{BA}-1$個</li>
+<li>さらに両側にそれぞれ<code>XA</code>, <code>BX</code>を追加できる
+
+<ul>
+<li><code>XA</code>, <code>BX</code>のそれぞれについて，それが1個以上あれば<code>AB</code>が1個増える（<code>XA</code>, <code>BX</code>も1個減る）．これらは破壊的に更新されたとする．</li>
+</ul></li>
+<li>余った<code>XA</code>, <code>BX</code>同士を組み合わせて<code>XABX...XABX</code>を作る：<code>AB</code>は$\min \{\text{XA}, \text{BX}\}$個</li>
+<li>従って$\text{AB} + \text{BA} - 1 + \min \{\text{XA}, \text{BX}\}$</li>
+</ul></li>
+<li><code>BA</code>がないとき：
+
+<ul>
+<li><code>XA</code>, <code>BX</code>の組み合わせのみ．従って$\text{AB} + \min \{\text{XA}, \text{BX}\}$</li>
+</ul></li>
+</ul>
+
+<p>文字列の中の特定文字列の個数を数える関数が見当たらなかったので適当な実装をした．最初は<code>Str.split</code>結果の<code>length</code>から1引いたものとしていたが，JavaScriptなどと異なりこれは特定文字列が先頭や末尾にある場合に空文字列が入らないためズレてしまう<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>．そこで単純にループによる数え上げで実装した．あるいは<a href="https://atcoder.jp/contests/diverta2019/submissions/5384221">検索対象の先頭に適当な文字（例えば本問では小文字は出ない）を入れたり</a>，<a href="https://atcoder.jp/contests/diverta2019/submissions/5411500">JavaScript版を再現したり</a>すれば大丈夫．</p>
+
+<h1 id="d-divrem-number">D. DivRem Number</h1>
+
+<p>感触は300点，数学要素も考慮すると簡単目な400点問題な気がする． <a href="https://atcoder.jp/contests/diverta2019/submissions/5375505">https://atcoder.jp/contests/diverta2019/submissions/5375505</a></p>
+
+<p>500点問題ということで最初数分は難しく考えすぎてしまったが，素直に$N=pm+q$と表示すればよい：$p=\lfloor \frac {N} {m} \rfloor$，$q=N \bmod m$．これらが等しくなるような$m$を求めたい：$N=pm+p=p(m+1)$．よって$N$の約数$d$が分かれば$m$の候補$m = d - 1$が得られる．あとは元々の条件$\lfloor N/m \rfloor = N \bmod m$を確かめればよい（$0$除算にならないように注意）．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">一応証明しておく．$N=pR+q\ (0 \le q \lt p)$とおくと$p=\lfloor N/R \rfloor$．このとき$pR \le N = pR+q$ $\lt pR+p = (p+1) R$であるから，$\lfloor N/R \rfloor + 1$個以上は買えない．
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><code>&quot;abxabyab&quot;</code>を<code>&quot;ab&quot;</code>で<code>split</code>する場合，JavaScriptでは<code>[&quot;&quot;,&quot;x&quot;,&quot;y&quot;,&quot;&quot;]</code>となるが，OCamlでは<code>[&quot;x&quot;,&quot;y&quot;]</code>となる．
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

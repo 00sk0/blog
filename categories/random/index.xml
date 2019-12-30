@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>random on sk0&#39;s blog</title>
+    <link>https://00sk0.github.io/blog/categories/random/</link>
+    <description>Recent content in random on sk0&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Sun, 23 Dec 2018 11:45:42 +0900</lastBuildDate>
+    
+	<atom:link href="https://00sk0.github.io/blog/categories/random/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://00sk0.github.io/blog/posts/hello_world/</link>
+      <pubDate>Sun, 23 Dec 2018 11:45:42 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/hello_world/</guid>
+      <description>というわけで文書置き場を作ってみました．とりあえずプログラミング関連や競技プログラミングの参加記録を置くことを予定しています．</description>
+    </item>
+    
+  </channel>
+</rss>

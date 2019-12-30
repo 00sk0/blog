@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/hugo_theme/"></link>
+    <title>
+        Hugoのテーマ作り備忘録 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>Hugoのテーマ作り備忘録</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Dec 23, 2018,</time><br> modified:
+                <time>Jan 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/dev">dev</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/website">website</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/hugo">hugo</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          <p>静的サイト生成ツール<a href="https://gohugo.io">Hugo</a>でこのサイトを作ってみました．導入自体はそこまで難しくないため，主にテーマ作成について<strong>備忘録</strong>レベルですがさっそく記事を書いてみようと思います．</p>
+
+<h1 id="所感">所感</h1>
+
+<ul>
+<li><a href="https://themes.gohugo.io/">Hugo Themes</a>のテーマをそのまま使うなら本当に簡単</li>
+<li>自分でテーマを作ろうとすると大変かもしれません</li>
+</ul>
+
+<h1 id="hugoを選んだ理由">Hugoを選んだ理由</h1>
+
+<ul>
+<li>Markdownが使える＋タグ毎の集計など個人的にblogに欲しい機能を実現する機構がある
+
+<ul>
+<li><a href="https://pugjs.org/">Pug</a>+JavaScriptで簡単なサイトを作った経験はあったものの，やっぱり書けるならMarkdownで書いたほうが楽だろうし，JavaScriptで諸機能を実装するのはそれなりに大変だった</li>
+</ul></li>
+<li>OCamlで簡単なものを実装してもよいとは思ったものの，<a href="https://www.markdownguide.org/extended-syntax/">Markdownの拡張記法</a>に対応するものがなかった<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>
+
+<ul>
+<li>自分でMarkdownパーサを書くのは（興味はありますが）今回は見送りました</li>
+</ul></li>
+<li>速いらしい（受け売り）</li>
+</ul>
+
+<h1 id="テーマ作りの備忘録">テーマ作りの備忘録</h1>
+
+<p>先に述べたように導入〜記事の追加については扱いません；<a href="https://gohugo.io/getting-started/quick-start/">公式ドキュメント</a>などを参照してください．</p>
+
+<p>以下<strong>備忘録につき誤りや不正確性を含みます</strong>．何より私がわかっていないので……：</p>
+
+<h2 id="レイアウトの構成">レイアウトの構成</h2>
+
+<ul>
+<li>公式ドキュメントが手厚すぎてどこから読めばいいのか戸惑うことに</li>
+<li>雑な認識：ページの種類に応じて読みに行くhtmlの候補が違う（./index.htmlや./_default/***.htmlなど）．それらから参照するテンプレートを./partials/内に入れておく．
+
+<ul>
+<li><a href="https://gohugo.io/templates/base/">Block Templates</a>だとbaseof.htmlに置いたblockをあとから_default/***.htmlなどから埋める構成にできるらしいです（まだ試していません）</li>
+</ul></li>
+<li>まずページの種類を知るべきな気がする
+
+<ul>
+<li>雑な認識：index.htmlを参照するのがトップページ，single.htmlを参照するのが各記事やaboutなどの単発文書，list.htmlを参照するのが記事一覧やTaxonomy（tagやcategoryなど）一覧，またはTaxonomy別の記事一覧．</li>
+</ul></li>
+<li>読みに行く候補の一覧が<a href="https://gohugo.io/templates/lookup-order/">Hugo&rsquo;s Lookup Order</a>にあります
+
+<ul>
+<li>私は記事最初のTipにあるようにindex.htmlと_default/list.htmlと_default/single.htmlだけ持ってあとは場合分けで済ませました<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>（表を睨むと確かにこれでよさそうな気がしてきます）</li>
+<li>雑な認識：index.htmlを参照するのがトップページ，single.htmlを参照するのが各記事やaboutなどの単発文書，list.htmlを参照するのが記事一覧やTaxonomy（tagやcategoryなど）一覧，またはTaxonomy別の記事一覧．</li>
+</ul></li>
+<li><a href="https://themes.gohugo.io/">Hugo Themes</a>のTagsから作りたいサイトの種類（blogなど）を探して出てきたテーマのソースをいくつか読んでみるのがよい気がします</li>
+</ul>
+
+<h2 id="テンプレート編集">テンプレート編集</h2>
+
+<ul>
+<li>先に述べたようなページの種類を把握した上で<a href="https://gohugo.io/categories/templates">Templates</a>の対応するページを読むのが楽だったように思う<sup class="footnote-ref" id="fnref:hoge"><a href="#fn:hoge">3</a></sup></li>
+<li><code>{{partial &quot;***.html&quot; .}}</code>の最後のドットを忘れるとハマります</li>
+<li><a href="https://golang.org/pkg/text/template/#hdr-Text_and_spaces">二重波括弧+ハイフン</a>を使わないと不自然な空白ができて生成HTMLが汚くなります．そのうち直したい．</li>
+<li>型の（わから）ない世界で格闘することにはなりそうです：今の&rdquo;<code>.</code>&ldquo;が何を指すのか，何のフィールドを持っているのか，など．<a href="https://gohugo.io/variables/">Variables and Params</a>を見ればよいと言われればそうなのですが．
+
+<ul>
+<li>例えば<code>.Data.Terms</code>とそれを回数順に並べた<code>.Data.Terms.ByCount</code>で型が違うのにマニュアルに書かれていないなど．</li>
+<li>結果的にテンプレートを展開して中身を見るprintfデバッグのようなことを延々としていました</li>
+</ul></li>
+<li>config.tomlの<code>[param]</code>内に適当にフィールドを定義して<code>.Site.Params.***</code>で取得可能</li>
+</ul>
+
+<h1 id="まとめ">まとめ</h1>
+
+<p>読み返すとマイナス面ばかり目立たせてしまったように思います．確かに全体像を把握しづらく次に何をすべきか分からなくなるという形の難しさは感じたものの，Hugo自体やドキュメントの構造に対する理解が進んだ途端に書きやすくはなりましたし，機能的には十分に満足です．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">脚注が欲しかった．
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">今思うとterms.htmlは使うべきでしたが<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">4</a></sup>，「自分で作ったmdはsingle.html，トップはindex.html，それ以外はlist.html」という単純な分類をしたかったという思いがありました．気が向いたら修正します．
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:hoge">分量のあるドキュメントから独力で把握するのが大変だったという話はありまして．
+ <a class="footnote-return" href="#fnref:hoge"><sup>[return]</sup></a></li>
+<li id="fn:3">category一覧やtag一覧などの表示に使えるはず．現在はlist.htmlにて<code>.Title</code>と<code>.Section</code>が（大小文字を区別せずに）同一であるかを見るという非常に危険な実装で代用しています．具体的には&rdquo;tags&rdquo;というタグを追加すると死にます．
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/hugo_deploy/">Hugo製サイトをWerckerでGitHub Pagesにデプロイ</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/hello_world/">Hello World</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

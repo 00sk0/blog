@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/abc126/"></link>
+    <title>
+        AtCoder Beginner Contest #126 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>AtCoder Beginner Contest #126</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>May 19, 2019,</time><br> modified:
+                <time>Dec 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/contest">contest</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          
+
+<p>参加こそしなかったもののYouTubeを観ながらダラダラと解いていた．</p>
+
+<h1 id="a-changing-a-character">A. Changing a Character</h1>
+
+<p>小文字にするだけ．AtCoderのOCamlコンパイラ(4.02.3)であれば文字列の破壊的変更が可能なのだが，私は4.06からOCamlを始めたのでその方法には詳しくない．そこで一度配列に格納するという回りくどい方法を取っている． <a href="https://atcoder.jp/contests/abc126/submissions/5482690">https://atcoder.jp/contests/abc126/submissions/5482690</a></p>
+
+<p>なお4.02.3には<code>(Char|String).lowercase_ascii</code>が無いことに注意（2CEした）．最新のOCamlではただの<code>lowercase</code>だと警告が出るもののこちらを使うべき．</p>
+
+<h1 id="b-yymm-or-mmyy">B. YYMM or MMYY</h1>
+
+<p>YYが<code>00</code>のときも駄目だと思ってしまった（西暦の下2桁なので<code>00</code>があってもよい）．2桁ずつ取って，それが1以上12以下であれば月として使える．これを両方について試し，条件分岐すればよい． <a href="https://atcoder.jp/contests/abc126/submissions/5484485">https://atcoder.jp/contests/abc126/submissions/5484485</a></p>
+
+<h1 id="c-dice-and-coin">C. Dice and Coin</h1>
+
+<p>ABCDEの中で一番困った． <a href="https://atcoder.jp/contests/abc126/submissions/5482306">https://atcoder.jp/contests/abc126/submissions/5482306</a></p>
+
+<p>$N$面サイコロの出目をすべて試す（出目を$v$とする）．このとき得点が$K$になる確率を調べたい．$K \le v$のときはサイコロを振った時点でゲームが終了するため，確率は$1$．$v \lt K$のときはコインを投げる必要がある．投げる回数を$i$とすると，$K \le v \times 2^{i}$となる最小の$i$を求めることになる．これは$\log$を用いて$\log_2 \frac {K} {v} \le i$と変形できるから，$i = \lceil \log_2 \frac {K} {v} \rceil$．従って確率は$\frac {1} {2^i}$．これを$v$について合計すればよい．</p>
+
+<p>なおループで$i$を求めても間に合ったようだ．これはループ回数が先の$\lceil \log_2 \frac {K} {v} \rceil$であることから$O(N \log K)$となる．</p>
+
+<h1 id="d-even-relation">D. Even Relation</h1>
+
+<p>図示するとよい． <a href="https://atcoder.jp/contests/abc126/submissions/5479971">https://atcoder.jp/contests/abc126/submissions/5479971</a></p>
+
+<p>まず奇数長の辺で結ばれた2つの頂点$p,q$は違う色でなければならない．このとき，その一端$q$からさらに繋がる点$r$について：</p>
+
+<ul>
+<li>辺$(q,r)$の長さが奇数長：$q,r$は異なる色にする必要があるが，これは可能である（$(p,r)$の距離は偶数長であるから$p,r$を同じ色にしてよい）．</li>
+<li>辺$(q,r)$の長さが偶数長：$(p,r)$の距離は奇数長になるから$p,r$は異なる色である必要がある．$p,q$と$p,r$がそれぞれ異なる色同士であるから，$q,r$は同じ色．</li>
+</ul>
+
+<p>よって奇数長の辺の一つの端点を選び，そこから繋がる点について再帰的に「辺の長さが奇数長であれば前の頂点と異なる色，偶数長であれば同じ色を塗る」処理を行えばよい．すべての辺が偶数長の場合はどのように頂点を塗ってもよいため適当に頂点を選べばよい．さらにすべてが偶数長でなくとも適当に頂点を選んでよい（奇数長の辺に遭遇するまですべて同じ色で塗ることになるが，その結果は奇数長の辺から始めた場合と同一であるから）．</p>
+
+<p>なお辺が偶数長であるときは本来両端に異なる色を塗ってもよいのだが，奇数長の辺が存在する場合失敗することがある．例えば辺$(1,2)$の長さが$1$，$(2,3)$の長さが$2$のとき，$2,3$に異なる色を塗ると$1,3$の色が等しくなるが，距離は$3$と奇数．</p>
+
+<h1 id="e-1-or-2">E. 1 or 2</h1>
+
+<p>ちょっと面食らった（$Z_i$を見て誤植かと思ったが制約を見て察した）が落ち着けば難しくない． <a href="https://atcoder.jp/contests/abc126/submissions/5479981">https://atcoder.jp/contests/abc126/submissions/5479981</a></p>
+
+<p>まず$A _ {X _ i} + A _ {Y _ i} + Z_i$が偶数であることから，$A _ {X _ i} + A_{Y _ i}$の偶奇が分かる．ここで$A_i$がすべて$1$か$2$であることに注意すると，$A _ {X _ i}$の値が分かれば$A _ {Y _ i}$の値も分かる（！）．これは連鎖する：$A_p + A_q$と$A_q + A_r$の偶奇が分かっているとき，$A_p$の値が分かれば$A_q$の値が分かり，さらに$A_r$の値が分かる．</p>
+
+<p>従ってこの関係を図示する，すなわち辺が各$(X_i,Y_i)$であるようなグラフを描けば，各連結成分について1つ値が分かりさえすれば残りの要素もすべて分かることになる．したがって連結成分の数が答えとなる．これはUnionFind（またはDFSなど）で調べられる．</p>
+
+<h1 id="f-xor-matching">F. XOR Matching</h1>
+
+<p>抽象的に区間の共通部分をうまく使う方法を考えていたが浮かばず．解説放送でも触れられていたが構築問題なので実験してみるべきだった． <a href="https://atcoder.jp/contests/abc126/submissions/5484463">https://atcoder.jp/contests/abc126/submissions/5484463</a></p>
+
+<p>解けなかった構築問題の記事をどう書けばいいかは難しいところだが，結論から言うと$K \le 2^M-1$のときに次のような形を作るとほとんどの場合でうまくいく（ただし$&hellip;$には$K$は含まれない）：
+$$0,1,2,&hellip;,2^M-1,K,2^M-1,&hellip;,2,1,0,K$$
+こうすると$K$以外の整数$v$同士が作る区間の共通部分をそのまま使い回せて（$v$同士のxorは$0$となるためxorが内側と等しくなる），その値は中央の$K$となる．$K$が作る区間については$K,&hellip;,2,1,0,K$となるが，このxorも実はほとんどの場合で$K$となる：</p>
+
+<p>$a$の値が$2^M-1$までであることに注目すると，この区間は
+$$K,2^M-1,2^M-2,&hellip;K+1,K-1,&hellip;,2,1,0,K$$
+となり，xorは$K \oplus 2^M-1 \oplus &hellip; \oplus 0$となる（順序を入れ替えることで$&hellip;$は$K$を含む）．これは<a href="https://00sk0.github.io/blog/posts/abc121">ABC121-D: XOR World</a>でも出題されたように隣り合う偶数と奇数のxorが$1$になることを利用すれば$K \oplus 1 \oplus &hellip; \oplus 1$となる．この$1$の個数は$2^M / 2$であり：</p>
+
+<ul>
+<li>$M = 0$のとき：
+
+<ul>
+<li>$1$の個数がバグるのでこの構築法は使えない．</li>
+<li>実際に試すと$a=\{0,0\}$しかない．よって$K=0$のみが存在．</li>
+</ul></li>
+<li>$M = 1$のとき：
+
+<ul>
+<li>$1$は$1$個．よってxorは$K \oplus 1$となる．これが$K$と等しいような数は存在しない（$K \oplus 1 = K$の両側に$K \oplus$を適用すれば$1 = 0$）．すなわちこの構築法は使えない．</li>
+<li>一方で，入出力例にもあるように$M=1$でも解を持つことがある．全探索で求めればよい．パターンは$\frac {4!} {2! 2!} = 6$通り，対称性を考慮すれば<code>0011</code>, <code>0101</code>, <code>0110</code>, <code>1001</code>の$4$つであり，ここから$K=0$のときは複数の解が存在する一方で，$K \ge 1$のときは存在しないことが明らかになる．</li>
+</ul></li>
+<li>$M \ge 2$のとき：
+
+<ul>
+<li>$1$は$2^M / 2$個であるが，これは偶数．従ってxorは$K \oplus (1 \oplus &hellip; \oplus 1)$ $= K \oplus (0 \oplus &hellip; \oplus 0) = K$．</li>
+<li>ゆえに確かに$K$同士の区間のxorも$K$となるから，この構築法が使える．</li>
+</ul></li>
+</ul>
+
+<p>最後に$K \gt 2^M-1$の場合：このときは先の構築はできないが，$0$から$2^M - 1$までの数を適当に選んでxorで作れる値の最大値は$2^M-1$である（$2^M$に相当するビットが立つことはないため）から弾いてしまって問題ない．</p>
+
+          <nav id="adjacent">
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

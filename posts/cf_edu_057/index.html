@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/cf_edu_057/"></link>
+    <title>
+        Educational Codeforces #57 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>Educational Codeforces #57</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Dec 29, 2018,</time><br> modified:
+                <time>Dec 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/contest">contest</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          
+
+<p>参加記録を書いてみます．とりあえず本番で解いたA,B,Cについて．editorialが出たらDも<del>追記します</del><ins>→追記しました</ins>．</p>
+
+<h1 id="a-find-divisible-https-codeforces-com-contest-1096-problem-a"><a href="https://codeforces.com/contest/1096/problem/A">A. Find Divisible</a></h1>
+
+<p>難しかった． <a href="https://codeforces.com/contest/1096/submission/47657942">https://codeforces.com/contest/1096/submission/47657942</a></p>
+
+<p>とりあえず$x=l,l+1,&hellip;$と固定することにすると，$y$の候補は$y=2x,3x,&hellip;$となる．ここで$y$は$[l,r]$内に収めたいことから$y$は最小値を取るべき，すなわち$y=2x$とするべきだと分かる．すると候補は$x$の値に対応して$(x,y)=(l,2l),(l+1,2(l+1)),&hellip;$となるが，同様に$y$は最小であってほしいから$(x,y)=(l,2l)$を選べばよい．</p>
+
+<h1 id="b-substring-removal-https-codeforces-com-contest-1096-problem-b"><a href="https://codeforces.com/contest/1096/problem/B">B. Substring Removal</a></h1>
+
+<p>AtCoderの64bit環境に慣れきってしまい，オーバーフローが起きていることに気づくまでに30分+4WAほど空費（+1WA: modの取り忘れ）． <a href="https://codeforces.com/contest/1096/submission/47658038">https://codeforces.com/contest/1096/submission/47658038</a></p>
+
+<!-- 連続区間を削除するということは左からl文字と右からr文字だけ残すということ． -->
+
+<p>隣り合う同じ文字で組を作ったときに（例: abbaaならa,bb,aa）組が3つ以上できる場合，両端以外の組は必ず消去しなければならないことに注意（a,b,a,b,aaのような場合でも中央のaだけ残して両隣のbを消すような芸当はできない）．そこで両端の組の文字および個数を調べておく．</p>
+
+<h2 id="両端の組の文字が異なる場合">両端の組の文字が異なる場合</h2>
+
+<p>例として<code>aacdeee</code>を選ぶと，両端の組は<code>aa</code>,<code>eee</code>となる．この場合は一方の組をすべて消す必要がある．左側をすべて消すとすると，全体としては次のような残し方がある（消した文字を<code>_</code>とする．消すものが連続区間であることに注意<sup class="footnote-ref" id="fnref:cont"><a href="#fn:cont">1</a></sup>）：</p>
+
+<ul>
+<li><code>__,__,eee</code></li>
+<li><code>__,__,_ee</code></li>
+<li><code>__,__,__e</code></li>
+<li><code>__,__,___</code></li>
+</ul>
+
+<p>右側も同様：</p>
+
+<ul>
+<li><code>aa,__,___</code></li>
+<li><code>a_,__,___</code></li>
+<li><code>__,__,___</code></li>
+</ul>
+
+<p>空文字列が重複しているから全体では$4+3-1=6$通り．一般には左右の組の文字数を$l,r$とすれば$(l+1)+(r+1)-1$通りと求まる．最初に除外した2組だけの場合も同じ式で求まるため，場合分けの必要はない．</p>
+
+<h2 id="両端の組の文字が同じ場合">両端の組の文字が同じ場合</h2>
+
+<p>例として<code>aaabaa</code>を選ぶと両端の組は<code>aaa,aa</code>となる．この場合，一方を完全に消す必要はない．すなわち「左の組からi文字，右の組からj文字消す」ような消し方となる：</p>
+
+<ul>
+<li><code>aaa,_,aa</code></li>
+<li><code>aa_,_,aa</code></li>
+<li><code>a__,_,aa</code></li>
+<li><code>___,_,aa</code></li>
+<li><code>aaa,_,_a</code></li>
+<li><code>aa_,_,_a</code></li>
+<li><code>a__,_,_a</code></li>
+<li><code>___,_,_a</code></li>
+<li><code>aaa,_,__</code></li>
+<li><code>aa_,_,__</code></li>
+<li><code>a__,_,__</code></li>
+<li><code>___,_,__</code></li>
+</ul>
+
+<p>いま左は$3$文字，右は$2$文字．よって左を$0 \sim 3$文字消して右を$0 \sim
+ 2$文字消すことが可能で，これらは独立だから$(3+1)*(2+1)=12$通り．一般には左右の組の文字数を$l,r$とすれば$(l+1)*(r+1)$通りと求まる．</p>
+
+<h1 id="c-polygon-for-the-angle-https-codeforces-com-contest-1096-problem-c"><a href="https://codeforces.com/contest/1096/problem/C">C. Polygon for the Angle</a></h1>
+
+<p>本番は場合分けに失敗した導出方法<sup class="footnote-ref" id="fnref:a"><a href="#fn:a">2</a></sup>だったがACではあった． <a href="https://codeforces.com/contest/1096/submission/47658098">https://codeforces.com/contest/1096/submission/47658098</a></p>
+
+<p>入力が$d$，答えが正$n$角形であるとする．中心を$O$，頂点を時計回りに$0,&hellip;,n-1$とする．いま対称性より3頂点$(a,b,c)$を$(0,j,k) (0 \lt j \lt k \lt n)$と選ぶ．</p>
+
+<p>まず一般に正$n$角形の隣り合う頂点$p,q$について$∠pOq=360/n$である．求めるのは円周角$∠abc$．円周角の定理より円周角は対応する中心角の1/2である．したがって$∠abc=\frac{∠aOc}{2}=\frac{360(n-k)/n}{2}=180(n-k)/n$となる<sup class="footnote-ref" id="fnref:c"><a href="#fn:c">3</a></sup>．よって解くべきは$180(n-k)/n=d$，変形して$180k=(180-d)n (0 \lt j \lt k \lt n)$となる．</p>
+
+<p>この一次不定方程式を解く．といっても定数項がないので$gcd(180,180-d)$で割って係数を互いに素にすればよい：$pk=qn$．すると正数解は$(n,k)=(p,q),(2p,2q),&hellip;$となる．</p>
+
+<p>答えは最小の$n$であるから$(n,k)=(p,q)$でよさそうに見えるが，$j$の存在を忘れてはならない：頂点$0,j$が存在するため実際は$k \ge 2$が必要．したがって$q=1$のときは$(2p,2q)$を採用し，そうでないときは$(p,q)$とする．</p>
+
+<p>なお，$180 \gt 180-d$より$p \gt q$であり必ず$k \lt n$となっていること，および$n$の最大値が$360$（$p$の最大値は$180-d$と$180$がはじめから互いに素のときで$180$．$d=179$のとき$q=1$となるため$n=2p=360$）であることから，解なしはあり得ない．</p>
+
+<h1 id="d-easy-problem-https-codeforces-com-contest-1096-problem-d"><a href="https://codeforces.com/contest/1096/problem/D">D. Easy Problem</a></h1>
+
+<p>指定された文字列を組み立てる方法の総数を求める問題は見たことがあったため，この問題もそれに近いだろうと一度はDPを考えた．ところが今回求めるものは逆に文字列を作らないための最小コストであることからか混乱して，状態をどう持つべきか思いつけなかった．</p>
+
+<h2 id="解法-editorial">解法(editorial)</h2>
+
+<p>$dp[i][j] := $「文字列の左から$i$文字目までにおいて，&rdquo;hard&rdquo;の$j$文字目まで作ってしまっている（$j=0$のときは空文字列とする）ときの最小コスト」とする．すると求める値は$\min_{i \in [0,3]} dp[n][i]$とできる． <a href="https://codeforces.com/contest/1096/submission/47816104">https://codeforces.com/contest/1096/submission/47816104</a></p>
+
+<p>こうして見ると文字を組み立てるときと結構同じ気がする．とするとなぜ解けなかったか気になるが，「文字を作らない」という条件の言い換えが上手くできなかったことが失敗要因かもしれない（文字を作るときのように途中状態に分解して考えればよかった，のかしら）．</p>
+
+<p>追記：文字列を作る過程をDFAと見ると，求めたい値は$dp[$受理状態$]$の中にある．文字列を完成させた場合の最少スコアを求めたい場合は受理状態が文字列の完成した状態$j=4$になる一方，今回の受理状態は文字列が完成していない状態$j=0,1,2,3$．</p>
+
+<p>実装については，今まではINFに<code>Int64.max_int</code>を採用していたため，これに値を足したものがオーバーフローして負になりバグらせてしまった．他の解決法もいくつか浮かんだものの，色々なsubmitを眺めた結果どうやらINFに$10^{18}$あたり（<code>1L&lt;&lt;60</code>など）を採用すればよさそうな感じがあり，今後はそうしていきたい．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:cont">中央を必ず消すのだから削除区間が中央にあり，その区間の左端右端をそれぞれ右左に伸ばすこととなる．よって左の組については右から0,1,&hellip;文字消すこととなる．右も同様．
+ <a class="footnote-return" href="#fnref:cont"><sup>[return]</sup></a></li>
+<li id="fn:a">aとb,bとcの間が180°を超えない場合?のみについて考えていた：$∠aOb,∠bOc$はそれぞれ$360j/n,360(k-j)/n$となる．ところで$⊿aOb,⊿bOc$はそれぞれ二等辺三角形であるから$∠abO,∠cbO$が求まる：$(180-(360j/n))/2, (180-(360(k-j)/n))/2$．この場合は図よりこれらの和を取れば$∠abc$と等しくなるから$∠abc=180-180k/n=d$となり，変形して$180k=(180-d)n$．これは本文と同じ式．
+ <a class="footnote-return" href="#fnref:a"><sup>[return]</sup></a></li>
+<li id="fn:c">$∠abc$に対応する$∠aOc$の値として採用すべきなのは鈍角であろうとなかろうと$360(n-k)/n$（数学ができなすぎて悩んでしまったが当たり前ではある……）．
+ <a class="footnote-return" href="#fnref:c"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/inversion_number/">転倒数とBinary Indexed Tree</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

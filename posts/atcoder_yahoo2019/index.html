@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/"></link>
+    <title>
+        Atcoder: みんなのプロコン2019 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>Atcoder: みんなのプロコン2019</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Feb 9, 2019,</time><br> modified:
+                <time>Dec 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/contest">contest</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          
+
+<h1 id="a-anti-adjacency">A. Anti-Adjacency</h1>
+
+<p>選ぶ数の最大値をなるべく小さくしたいことから，1から1つ飛ばしで数を選んでいくのが最適．このとき$k$個目$(k=1,&hellip;)$の数は$k$番目の正奇数，すなわち$2k-1$であるから，これと$n$との大小を比較する． <a href="https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220931">https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220931</a></p>
+
+<h1 id="b-path">B. Path</h1>
+
+<p>問題文の処理をそのまま実装するDFSを書いた．道に番号を振ってそれぞれの道を通ったかを配列で記録しておけば，3回の移動で「すべての道を」「1回ずつ」通ったかは迷いなく判断可能． <a href="https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220932">https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220932</a></p>
+
+<p>editorialの解法は一応紙に書いて確かめるとそれっぽいのだけど洩れを作りそうで怖い．</p>
+
+<h1 id="c-when-i-hit-my-pocket">C. When I hit my pocket&hellip;</h1>
+
+<p>こういう操作の特性を考える系の問題は何も浮かばないことが多い気がする．実験をした． <a href="https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220933">https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4220933</a></p>
+
+<p>本文中にある操作を上からP,Q,Rとする．円を持っていても仕方がないので操作Q,Rの数は同数．すると例えば操作列は<code>PPPQRPPQQRRP...</code>のようになるが，<code>P...PQR...QR</code>と整列して構わない．このとき<code>P</code>の数を$p$，<code>QR</code>の数を$q$とすると，$p+2q=k$．
+このときのスコアは$p+1+(b-a)q$ $= (k-2q)+1+(b-a)q$ $= (b-a-2)q+k+1$．</p>
+
+<p>$q$の係数が負または0，すなわち$b-a \le 2$の場合は$q$が少ないほうがよく，$q=0$としてスコアは$k+1$．そうでない場合は$q$は多いほうが良い．ただし操作Qを行う条件として$p \ge a-1$，変形して$q \le \frac {k-a+1} {2}$が必要であり，$q = \lfloor \frac {k-a+1}{2} \rfloor$としてスコアを算出すればよい．ここで$q \ge 0$にも注意：$q$が負のときは$q=0$とする．</p>
+
+<p>最初は$p$について整理しようとして散々な目に遭った．$q= \frac{k-p}{2}$を用いると$p+1+(b-a)q$ $= p+1+(b-a)(k-p)$ $= p(1-(b-a))+1+(b-a)k$．$b-a \gt 1$のときは$p$の係数が負なので操作Q,Rを増やすべきだが，操作Qを行う条件として$p \ge a-1$．素直に$p=a-1$としたいが，$q$は整数なので$k-(a-1)$の偶奇で場合分け：偶数のときはそのまま$q=\frac {k-(a-1)}{2}, p=a-1$．奇数のときは$q = \lfloor \frac{k-(a-1)} {2} \rfloor$ $(=\frac {k-a} {2})$としてしまうと1操作余るため，それを操作Pに回して$p=a, q=\frac {k-a} {2}$とする．こちらのほうが面倒．</p>
+
+<p>ところでeditorialでは最初から$b-a \le 2$かを見ている．これは操作QR（スコア$+(B-A)$）と操作PP（スコア$+2$)の比較と見れば納得できる：$b-a \le 2$であれば後者を選んだほうがよく，$b - a \ge 2$であれば前者を選んだほうが得をする．</p>
+
+<h1 id="d-ears">D. Ears</h1>
+
+<p>散歩が1回だけという条件を読み落としていたが，そうでなくても解けなかったと思う．</p>
+
+<h2 id="解説-editorialなど">解説(editorialなど)</h2>
+
+<p>まず散歩により耳がどうなるかを考えると，これは[$0$]<sup>*</sup>-[偶数$\ge 2$]<sup>*</sup>-[奇数]<sup>*</sup><sup class="footnote-ref" id="fnref:d1"><a href="#fn:d1">1</a></sup>-[偶数$\ge 2$]<sup>*</sup>-[$0$]<sup>*</sup>という$5$つの区間が並んだ形になる．逆にこの条件下であれば任意数の石を入れることができる<sup class="footnote-ref" id="fnref:d0"><a href="#fn:d0">2</a></sup>．</p>
+
+<p>この結果の導出については<a href="https://betrue12.hateblo.jp/entry/2019/02/10/014031">こちらの記事</a>が大変参考になった：始端$\to$終端という一番単純な形から考えてみる．この2点を固定すると，散歩のバリエーションとしてあり得るのは途中箇所に往復を加えたものだけであるから増分は必ず偶数となり，ここから導かれる<sup class="footnote-ref" id="fnref:d1-25"><a href="#fn:d1-25">3</a></sup>．
+以下では当該記事も含めた2記事を参考文献としている（後掲する）．</p>
+
+<p>本問で行う操作は次の2つ：</p>
+
+<ol>
+<li>散歩によって位置$i$の石の個数を$b[i]$とする</li>
+<li>各$b[i]$に好きな回数だけ$\pm 1$をし，$b[i]=a[i]$とする</li>
+</ol>
+
+<p>各位置$i$が散歩のときどの区間だったのかを考える．先に述べた区間を順に$Z_l,E_l,O,E_r,Z_r$とする<sup class="footnote-ref" id="fnref:d2"><a href="#fn:d2">4</a></sup>．
+前の数字が区間$A$であるとすると区間の順序から位置$i+1$は$A$以降の種類のどれかになるはずであり，逆にどれになっても構わない<sup class="footnote-ref" id="fnref:d3"><a href="#fn:d3">5</a></sup>．</p>
+
+<p>位置$i$が当て嵌まる区間の種類を仮定すると，$a[i]$の値から必要な操作の回数もわかる（先に述べたように$b[i]$が好きなように作れるため）：</p>
+
+<ul>
+<li>$a[i]$が$Z_l$: $b[i]=0$から$a[i]$回操作を行って$a[i]$にしたとするのが最小</li>
+<li>$a[i]$が$E_l$: $b[i]$は2以上の偶数であることから，
+
+<ul>
+<li>$a[i]=0$のとき操作は$2$回（$b[i]=2$として$-2$する）</li>
+<li>$2$以上の偶数のとき$0$回（そのまま）</li>
+<li>奇数のとき$1$回（$b[i]=a[i]+1$とすると，操作で$-1$することで$a[i]$が作れる）</li>
+</ul></li>
+<li>$a[i]$が$O$: $b[i]$は奇数であるから，
+
+<ul>
+<li>$a[i]$が奇数であれば操作は$0$回</li>
+<li>偶数であれば$1$回（$b[i]=a[i]+1$とする）</li>
+</ul></li>
+<li>$a[i]$が$E_r$: $E_l$と同様</li>
+<li>$a[i]$が$Z_r$: $Z_l$と同様</li>
+</ul>
+
+<p>肝心の区間を決めたい．なんか以前に「区間の境界を1つ決めると残りの境界も決まる」というのを見たことがあるが今回はたぶんそうはならない．DPができる：$dp[i][K] := $「$a[i]$が区間$K$であるときの操作回数の最小値」とすると，先に説明したように区間の遷移を書ける．すなわち区間$K$に対して先の操作回数を$f_K (a[i])$，$K$またはそれ以前の区間の種類を$P(K)$とおくと：</p>
+
+<p>$$dp[i+1][K] \gets \min_{J \in P(K)} \{ dp[i][J] + f_J (a[i]) \}$$</p>
+
+<p>となる．配るDPとして解釈したほうが先の記述に合っているが，配るDPを式で書くときの慣例がよくわからず．
+計算量は$K$が5通りなので$O(L)$．考察さえ済めばかなり綺麗に書ける． <a href="https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4262826">https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4262826</a></p>
+
+<p>あまりDPを知らないので説明自体はそんなにできないが，遷移のために参照すべき情報が「前の番地の区間種別」だけであるからそれが等しい状態を一つに纏めてよい，ということなのだろうか．
+また参考文献2にもあるように，遷移関係をオートマトンと見て現在の状態を保持するDPをしていると考えると，確かにこのような例は前にも見た気がする．例えば<a href="https://00sk0.github.io/blog/posts/cf_edu_057/">Educational Codeforces #57 D問題</a>なんかも文字列の組み立て過程を状態として扱っているが，確かにDFAと意識することができそう．答えの候補は$dp[$受理状態$]$．</p>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+<li><a href="https://betrue12.hateblo.jp/entry/2019/02/10/014031">https://betrue12.hateblo.jp/entry/2019/02/10/014031</a></li>
+<li><a href="http://koba-e964.hatenablog.com/entry/2019/02/10/003030">http://koba-e964.hatenablog.com/entry/2019/02/10/003030</a></li>
+</ol>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:d1">始端=終端のとき長さ$0$もあり得る．
+ <a class="footnote-return" href="#fnref:d1"><sup>[return]</sup></a></li>
+<li id="fn:d0">怪しい説明：例えば現在の散歩範囲に含まれる区間$[p,q]$に$+4$したい場合を考える．$p$に着いたときに$p \to q \to p \to q \to p$を行えば$+4$かつ元通り$p$に戻る．加えたい数字が変わるところで区間を切ってそれぞれに対して同様の処理を行えば互いに独立になるので大丈夫そうな気がしてくる．
+ <a class="footnote-return" href="#fnref:d0"><sup>[return]</sup></a></li>
+<li id="fn:d1-25">このように考えたほうが散歩範囲の左端と右端が現れる理由が若干明確になる気はする．
+ <a class="footnote-return" href="#fnref:d1-25"><sup>[return]</sup></a></li>
+<li id="fn:d2">$O$がゼロの区間に見えてしまうので微妙い．
+ <a class="footnote-return" href="#fnref:d2"><sup>[return]</sup></a></li>
+<li id="fn:d3">$Z_l$と$Z_r$，および$E_l$と$E_r$は条件として同じであるから，例えば区間$K$について$K \to Z_l$と$K \to Z_r$ではより自由度の高い左側だけを考えてもよい．とはいえ実行時間的には<a href="https://atcoder.jp/contests/yahoo-procon2019-qual/submissions/4272515">わずかに早くなる</a>だけだった（オンラインジャッジで実行時間が計れるかは微妙な気がするがどのテストケースでもそうなので恐らく）．
+ <a class="footnote-return" href="#fnref:d3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

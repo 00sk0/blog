@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on sk0&#39;s blog</title>
+    <link>https://00sk0.github.io/blog/tags/algorithm/</link>
+    <description>Recent content in algorithm on sk0&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Tue, 25 Dec 2018 14:32:46 +0900</lastBuildDate>
+    
+	<atom:link href="https://00sk0.github.io/blog/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>転倒数とBinary Indexed Tree</title>
+      <link>https://00sk0.github.io/blog/posts/inversion_number/</link>
+      <pubDate>Tue, 25 Dec 2018 14:32:46 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/inversion_number/</guid>
+      <description>&lt;p&gt;転倒数とBITについて知ったのでまとめておく．&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

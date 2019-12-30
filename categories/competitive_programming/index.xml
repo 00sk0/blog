@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>competitive_programming on sk0&#39;s blog</title>
+    <link>https://00sk0.github.io/blog/categories/competitive_programming/</link>
+    <description>Recent content in competitive_programming on sk0&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Sun, 19 May 2019 23:57:39 +0900</lastBuildDate>
+    
+	<atom:link href="https://00sk0.github.io/blog/categories/competitive_programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AtCoder Beginner Contest #126</title>
+      <link>https://00sk0.github.io/blog/posts/abc126/</link>
+      <pubDate>Sun, 19 May 2019 23:57:39 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc126/</guid>
+      <description>参加こそしなかったもののYouTubeを観ながらダラダラと解いていた． A. Changing a Character 小文字にするだけ．AtCoderのOCamlコンパイラ(4.0</description>
+    </item>
+    
+    <item>
+      <title>AtCoder: diverta 2019 Programming Contest</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_diverta2019/</link>
+      <pubDate>Sun, 12 May 2019 23:40:34 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_diverta2019/</guid>
+      <description>Cで嵌ってしまった． A. Consecutive Integers 区間を覆う問題は何度か解いたので記憶していた．図を描けばわかりやすい． https://atcoder.jp/contests/diverta2019/submissions/5375209 選ぶ連続した整数を区間と見る．例えば$N=</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #125</title>
+      <link>https://00sk0.github.io/blog/posts/abc125/</link>
+      <pubDate>Sun, 28 Apr 2019 08:33:16 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc125/</guid>
+      <description>久々に競技プログラミングをした（といっても外出していてコンテストには出場していない）．感覚が抜けていて妙なところに時間を掛け過ぎてしまった節</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #121</title>
+      <link>https://00sk0.github.io/blog/posts/abc121/</link>
+      <pubDate>Sun, 10 Mar 2019 13:22:11 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc121/</guid>
+      <description>A. Cells 残った白い部分を左上に詰めると考えやすい気がする（ABC106Aの解説のように）． https://atcoder.jp/contests/abc121/submissions/4541134 B. Can you solve this? Yes. 数式をそのまま実装すればよい． https://atcoder.jp/contests/abc121/submissions/4541318 iter</description>
+    </item>
+    
+    <item>
+      <title>競プロ過去問演習#1</title>
+      <link>https://00sk0.github.io/blog/posts/cp_001/</link>
+      <pubDate>Wed, 06 Mar 2019 00:50:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cp_001/</guid>
+      <description>&lt;p&gt;競プロの過去問のうち気になったものについてまとめて記録してみる．&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #120</title>
+      <link>https://00sk0.github.io/blog/posts/abc120/</link>
+      <pubDate>Mon, 04 Mar 2019 01:57:47 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc120/</guid>
+      <description>未だにABC#116,117の記事が書けていないことが気になる（#117は大体書けたけど#116のVarious Sushiの証明ができていな</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #119</title>
+      <link>https://00sk0.github.io/blog/posts/abc119/</link>
+      <pubDate>Sun, 24 Feb 2019 21:31:54 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc119/</guid>
+      <description>A. Still TBD 日付を扱う手間があって面倒に見えた．特に0埋めされた数をきちんとscanfで読めるか不安だったのだがどうやらできるらしい． https://atcoder.jp/contests/abc119/submissions/4378101 また文字列</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #118</title>
+      <link>https://00sk0.github.io/blog/posts/abc118/</link>
+      <pubDate>Mon, 18 Feb 2019 09:30:04 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc118/</guid>
+      <description>コンテストの存在自体を忘却． A. B+/-A 一瞬約数判断を素因数分解か結果の埋め込みかで解こうとしてしまった．editorialにもあるが$p$が$q$</description>
+    </item>
+    
+    <item>
+      <title>Atcoder: みんなのプロコン2019</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_yahoo2019/</link>
+      <pubDate>Sat, 09 Feb 2019 22:20:24 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_yahoo2019/</guid>
+      <description>A. Anti-Adjacency 選ぶ数の最大値をなるべく小さくしたいことから，1から1つ飛ばしで数を選んでいくのが最適．このとき$k$個目$(k=1,&amp;hellip;)</description>
+    </item>
+    
+    <item>
+      <title>Atcoder: Nikkei Programming Contest 2019</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_nikkei2019/</link>
+      <pubDate>Sun, 27 Jan 2019 22:37:02 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_nikkei2019/</guid>
+      <description>A. Subscribers 難しい． https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889 $m=|X \cap Y|$の最大値および最小値を求める問題．最大値が$\min \{|X|,|Y|\}$なのはまあわかる．最小値には「どちらも購</description>
+    </item>
+    
+    <item>
+      <title>Educational Codeforces #59</title>
+      <link>https://00sk0.github.io/blog/posts/cf_edu_059/</link>
+      <pubDate>Sun, 27 Jan 2019 03:35:38 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cf_edu_059/</guid>
+      <description>不参加ではあるがABCの3問を30分程度で解いた（テストせず＋Aで1WAなので割と嘘）．しばらくはコンテスト自体にはあまり出場しない予定だが</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Round #532</title>
+      <link>https://00sk0.github.io/blog/posts/cf_532/</link>
+      <pubDate>Mon, 14 Jan 2019 00:35:52 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cf_532/</guid>
+      <description>&lt;p&gt;そんなによくできた感もないのだが+107．よくできたと思って+30しか出なかった経験も3回くらいあるのでますます謎．&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Atcoder: AISing Programming Contest 2019</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_aising2019/</link>
+      <pubDate>Sat, 12 Jan 2019 22:00:49 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_aising2019/</guid>
+      <description>&lt;p&gt;ROMっていた．D問題の解説がよく分からない．&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Round #530</title>
+      <link>https://00sk0.github.io/blog/posts/cf_530/</link>
+      <pubDate>Sun, 06 Jan 2019 03:17:38 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cf_530/</guid>
+      <description>A. Snowball 問題文ではなくテストケースに書かれている処理をそのまま実装． https://codeforces.com/contest/1099/submission/48379967 B. Squares and Segments https://codeforces.com/contest/1099/submission/48394492 横幅および縦幅を広げてしまうと必要なSegment数が増えるため</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Hello 2019</title>
+      <link>https://00sk0.github.io/blog/posts/cf_hello_2019/</link>
+      <pubDate>Sat, 05 Jan 2019 02:50:37 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cf_hello_2019/</guid>
+      <description>&lt;p&gt;新年早々水色陥落しかけていますが……．&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Good Bye 2018</title>
+      <link>https://00sk0.github.io/blog/posts/cf_goodbye2018/</link>
+      <pubDate>Mon, 31 Dec 2018 01:57:05 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cf_goodbye2018/</guid>
+      <description>体調不良で参加は見合わせたのだがそのまま解き続けてみたら結果的に1時間半くらいで4完できたので出ればよかった（+80くらい出たらしい）． 今日</description>
+    </item>
+    
+    <item>
+      <title>Educational Codeforces #57</title>
+      <link>https://00sk0.github.io/blog/posts/cf_edu_057/</link>
+      <pubDate>Sat, 29 Dec 2018 14:52:23 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cf_edu_057/</guid>
+      <description>参加記録を書いてみます．とりあえず本番で解いたA,B,Cについて．editorialが出たらDも追記します→追記しました． A. Find Divisible 難しかった．</description>
+    </item>
+    
+    <item>
+      <title>転倒数とBinary Indexed Tree</title>
+      <link>https://00sk0.github.io/blog/posts/inversion_number/</link>
+      <pubDate>Tue, 25 Dec 2018 14:32:46 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/inversion_number/</guid>
+      <description>&lt;p&gt;転倒数とBITについて知ったのでまとめておく．&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

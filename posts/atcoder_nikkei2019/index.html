@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/"></link>
+    <title>
+        Atcoder: Nikkei Programming Contest 2019 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>Atcoder: Nikkei Programming Contest 2019</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Jan 27, 2019,</time><br> modified:
+                <time>Dec 14, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/contest">contest</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          
+
+<h1 id="a-subscribers">A. Subscribers</h1>
+
+<p>難しい． <a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889">https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889</a></p>
+
+<p>$m=|X \cap Y|$の最大値および最小値を求める問題．最大値が$\min \{|X|,|Y|\}$なのはまあわかる．最小値には「どちらも購読していない人たちが$0$人以上でなければならない」という条件が入る：$|X \cup Y|=|X|+|Y|-|X \cap Y|=a+b-m$より，先の人数は$n-(a+b-m) \ge 0$，移項して$m \ge a + b - n$が必要．加えて$m \ge 0$であるから，連立させて$m \ge \max \{(a+b-n), 0\}$となる．</p>
+
+<h1 id="b-touitsu">B. Touitsu</h1>
+
+<p>最初なんとなくどれかに揃えれば良さそうな気がしたがそんなことは無かった（サンプルが優しい）．$a,b,c$の$i$文字目について多数決を採ればよい．どれも異なればコストは+2, 1ペアだけあれば+1, すべて揃っていれば+0． <a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4112885">https://atcoder.jp/contests/nikkei2019-qual/submissions/4112885</a></p>
+
+<h1 id="c-diffrent-strokes">C. Diffrent Strokes</h1>
+
+<p>前にも見た気がする． <a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4112886">https://atcoder.jp/contests/nikkei2019-qual/submissions/4112886</a></p>
+
+<p>高橋くんが目標を実現するための手段としては「自分のスコアを大きくする」以外に「青木さんのスコアを小さくする」もある．ここから考えると，高橋くんが$a[i]$番目を取ると青木さんは$b[i]$を取れないから高橋くんは$a[i]+b[i]$だけ得すると考えられる．よって$a[i]+b[i]$をソートし，これが大きい順に$a[i]$を取ればよい．青木さん視点でも同様に考えれば$b[i]+a[i]$の大きい順に取りたいこととなる．したがって先のソート結果から二人して大きい順に取って行き，高橋くんの手番ではスコアに+$a[i]$を，青木さんの手番では-$b[i]$していけばよい．</p>
+
+<h2 id="editorial">editorial</h2>
+
+<p>解説では片方の得点だけを考えてよいようにゲームを変形している．青木さんがすべて食べた状態，すなわち高橋くんのスコアが$-\sum b[i]$の状態から高橋くんが$i$を選んで自分のスコアに$a[i]+b[i]$加算する（青木さんが$i$を選んでもスコアが変動しない）ゲームを考えても同じこと．すると両者が注目すべきは高橋くんのスコアだけになる：高橋くんは自分のスコアを増大させることだけに専念すればよいので$a[i]+b[i]$の大きいほうから取って行けばよい．青木さんが出来ることは高橋くんが高いスコアを取れないように妨害する，すなわち$a[i]+b[i]$の大きいほうから取っていくことだけである．</p>
+
+<p>このような手法は割と見た記憶がある．個人的には私の解法のほうが自然に思えるのだが，定着させればまた違ってくるのだろうか．</p>
+
+<h1 id="d-restore-the-tree">D. Restore the Tree</h1>
+
+<p>トポロジカルソートは<a href="https://00sk0.github.io/blog/posts/cf_532">この前やった</a>こともあり使いそうだとは思ったもののどう使えばいいかわからず撤退．というか寝惚けてて閉路ができるのではと疑ってしまったのだが全くそんなことは無かった（木構造に対して親から子孫に矢印を引くので子孫から親方向の辺が作られることはない）．</p>
+
+<h2 id="解説-editorial">解説(editorial?)</h2>
+
+<p><a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4112887">https://atcoder.jp/contests/nikkei2019-qual/submissions/4112887</a></p>
+
+<p>根からトポロジカルソートすると（根は入力辺が無い点を調べればすぐに求まる），その結果はすべての辺のin/out順に並んでいる．いま要素$v$に入る辺が$p,q$（出現順序もこの通りとする）から出ているとき，元々の木に存在した辺は$q \to v$．</p>
+
+<p>証明（editorialが分からなかったので独自解釈，したがって誤りがありそう）：$p \rightarrow v$が元々の辺だったとすると，操作によって$q \rightarrow v$を引く条件から元々の木にも$q$から$v$に至る経路$q \to s_1 \to &hellip; \to s_{k-1} \to s_k \to v\ (k \ge 1)$<sup class="footnote-ref" id="fnref:d00"><a href="#fn:d00">1</a></sup>が存在することとなる．
+まず元々は木構造であるから合流地点は存在しない：いま$v$に入る辺は$p \to v$と$s_k \to v$があり，これらが同一でなければならないから$s_k=p$である．ここで$q$から$v$への経路は$q \to s_1 \to &hellip; \to s_{k-1} \to p \to v$となるが，これに含まれる各頂点はこの順序でトポロジカルソートに現れるはずである．これは$p,q$の順序に矛盾．</p>
+
+<p>一方で$q \rightarrow v$が元々の辺であるとすれば$p \to &hellip; \to q \to v$となり，問題なく操作によって$p \rightarrow v$を引くことが可能．辺の出自が$p_1,p_2,&hellip;,p_l,q$と3頂点以上の場合も各$p_i$と$q$に対して同様の議論を適用すれば$q \rightarrow v$以外あり得ないことが分かりそう．</p>
+
+<p>最初トポロジカルソートにおいて右側の要素の深さは左の要素と同等またはそれ以上だと勝手に思っていたのだがそんなことはない（wikipediaの図からも分かる）．木構造でも片方の子を深く掘れば反例が作れる．</p>
+
+<p>全然関係ないがAtCoderでもCodeforcesでも提出したコードを正常にハイライトしてくれないの悲しい．OCamlに限った話かは分からないけれど．</p>
+
+<h3 id="追記-editorial式">追記：editorial式</h3>
+
+<p>上を踏まえてeditorialを読むとそれなりに分かった気になれた：点$v$に入る辺を$\{x_i \to v\}$（$x_i$はトポロジカルソートに従って整列されているとする）とすると，合流地点が存在しないことから元の木での$x_i$から$v$への経路はすべてただひとつの辺$p_v \to v$に合流する（$p_v := $元の木での$v$の親）．よって$x_i$は$p_v$の祖先（またはそれ自身）であるから，$x_1, &hellip;, x_k, p_v, v$はトポロジカルソートにおいてこの順に現れることが分かる（重複部については順不同とする）．いま$\{x_i\}$の中に$p_v$が存在するが，それは$x_k$しかあり得ない．</p>
+
+<p>こうして見ると合流地点の非存在性を意識できなかったことが敗因な気がする．</p>
+
+<h2 id="別解">別解</h2>
+
+<p>本番で思いついたものの考えきれずに捨てた解法だったがこれでも正解できるようだ．各頂点について根からの距離が最長となるような経路が元の木の経路となる．理由としては操作によって追加される辺は先祖から子孫を繋ぐ，すなわち根からの距離を減少させるようにしか張れないことが挙げられそう．これにより距離最大以外の経路を採用すると最大長の経路が作れなくなって矛盾する．合っているかはわからない．</p>
+
+<p>今回のようなDAGの最長経路の求め方を検索すると，トポロジカルソートを利用したものが出てくる．<a href="https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/">GeeksforGeeks</a>によると，トポロジカルソート順に頂点を調べ，そこを始点とする辺の終点について距離を更新していけばよいとのこと．理由が書かれていないので推測：通り過ぎた頂点に対して新たに最長経路が見つかるとそこから到達する頂点すべてに対して再計算が必要になるが，トポロジカルソート順だと一度通り過ぎた点はもう使われないために再計算が起こらないから？ <a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4113005">https://atcoder.jp/contests/nikkei2019-qual/submissions/4113005</a></p>
+
+<p>ところで提出を眺めていると上位陣にこれをBFSで求めている解答が散見された<sup class="footnote-ref" id="fnref:d11"><a href="#fn:d11">2</a></sup>．
+BFSのアルゴリズムを思い出すと，BFS順で最後に点$v$に到達するときが根から$v$までの最長経路となる（最短経路から順に見つかっていくので）．したがってBFS順で最後になるまでは無視し，最後になったらようやく遷移をすればよい．最後かどうかは$v$に到達する辺の個数を数えておけば判断可能で，このときに親ノードを記録し，遷移をしていく．重みが一定の場合にしか使えなそうだが考え方として面白かった． <a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4113002">https://atcoder.jp/contests/nikkei2019-qual/submissions/4113002</a></p>
+
+<p>最初は「根からDFSをして各頂点に対して根からの最長距離を記録しておけば，もう一度DFSをすることでその情報から経路を復元できる」という方針を立てていたのだがこの方針だと例の再計算を何回も行うことになりTLE．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:d00">後にも述べるが木は合流地点を持たないため$p \to v$と$q \to v$が同時に辺であることはない．従って$s_1$は必ず存在する．
+ <a class="footnote-return" href="#fnref:d00"><sup>[return]</sup></a></li>
+<li id="fn:d11"><a href="https://atcoder.jp/contests/nikkei2019-qual/submissions/4100659">https://atcoder.jp/contests/nikkei2019-qual/submissions/4100659</a> など．
+ <a class="footnote-return" href="#fnref:d11"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

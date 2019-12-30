@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>atcoder on sk0&#39;s blog</title>
+    <link>https://00sk0.github.io/blog/tags/atcoder/</link>
+    <description>Recent content in atcoder on sk0&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>jp</language>
+    <lastBuildDate>Sun, 19 May 2019 23:57:39 +0900</lastBuildDate>
+    
+	<atom:link href="https://00sk0.github.io/blog/tags/atcoder/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AtCoder Beginner Contest #126</title>
+      <link>https://00sk0.github.io/blog/posts/abc126/</link>
+      <pubDate>Sun, 19 May 2019 23:57:39 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc126/</guid>
+      <description>参加こそしなかったもののYouTubeを観ながらダラダラと解いていた． A. Changing a Character 小文字にするだけ．AtCoderのOCamlコンパイラ(4.0</description>
+    </item>
+    
+    <item>
+      <title>AtCoder: diverta 2019 Programming Contest</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_diverta2019/</link>
+      <pubDate>Sun, 12 May 2019 23:40:34 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_diverta2019/</guid>
+      <description>Cで嵌ってしまった． A. Consecutive Integers 区間を覆う問題は何度か解いたので記憶していた．図を描けばわかりやすい． https://atcoder.jp/contests/diverta2019/submissions/5375209 選ぶ連続した整数を区間と見る．例えば$N=</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #125</title>
+      <link>https://00sk0.github.io/blog/posts/abc125/</link>
+      <pubDate>Sun, 28 Apr 2019 08:33:16 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc125/</guid>
+      <description>久々に競技プログラミングをした（といっても外出していてコンテストには出場していない）．感覚が抜けていて妙なところに時間を掛け過ぎてしまった節</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #121</title>
+      <link>https://00sk0.github.io/blog/posts/abc121/</link>
+      <pubDate>Sun, 10 Mar 2019 13:22:11 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc121/</guid>
+      <description>A. Cells 残った白い部分を左上に詰めると考えやすい気がする（ABC106Aの解説のように）． https://atcoder.jp/contests/abc121/submissions/4541134 B. Can you solve this? Yes. 数式をそのまま実装すればよい． https://atcoder.jp/contests/abc121/submissions/4541318 iter</description>
+    </item>
+    
+    <item>
+      <title>競プロ過去問演習#1</title>
+      <link>https://00sk0.github.io/blog/posts/cp_001/</link>
+      <pubDate>Wed, 06 Mar 2019 00:50:32 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/cp_001/</guid>
+      <description>&lt;p&gt;競プロの過去問のうち気になったものについてまとめて記録してみる．&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #120</title>
+      <link>https://00sk0.github.io/blog/posts/abc120/</link>
+      <pubDate>Mon, 04 Mar 2019 01:57:47 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc120/</guid>
+      <description>未だにABC#116,117の記事が書けていないことが気になる（#117は大体書けたけど#116のVarious Sushiの証明ができていな</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #119</title>
+      <link>https://00sk0.github.io/blog/posts/abc119/</link>
+      <pubDate>Sun, 24 Feb 2019 21:31:54 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc119/</guid>
+      <description>A. Still TBD 日付を扱う手間があって面倒に見えた．特に0埋めされた数をきちんとscanfで読めるか不安だったのだがどうやらできるらしい． https://atcoder.jp/contests/abc119/submissions/4378101 また文字列</description>
+    </item>
+    
+    <item>
+      <title>AtCoder Beginner Contest #118</title>
+      <link>https://00sk0.github.io/blog/posts/abc118/</link>
+      <pubDate>Mon, 18 Feb 2019 09:30:04 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/abc118/</guid>
+      <description>コンテストの存在自体を忘却． A. B+/-A 一瞬約数判断を素因数分解か結果の埋め込みかで解こうとしてしまった．editorialにもあるが$p$が$q$</description>
+    </item>
+    
+    <item>
+      <title>Atcoder: みんなのプロコン2019</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_yahoo2019/</link>
+      <pubDate>Sat, 09 Feb 2019 22:20:24 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_yahoo2019/</guid>
+      <description>A. Anti-Adjacency 選ぶ数の最大値をなるべく小さくしたいことから，1から1つ飛ばしで数を選んでいくのが最適．このとき$k$個目$(k=1,&amp;hellip;)</description>
+    </item>
+    
+    <item>
+      <title>Atcoder: Nikkei Programming Contest 2019</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_nikkei2019/</link>
+      <pubDate>Sun, 27 Jan 2019 22:37:02 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_nikkei2019/</guid>
+      <description>A. Subscribers 難しい． https://atcoder.jp/contests/nikkei2019-qual/submissions/4112889 $m=|X \cap Y|$の最大値および最小値を求める問題．最大値が$\min \{|X|,|Y|\}$なのはまあわかる．最小値には「どちらも購</description>
+    </item>
+    
+    <item>
+      <title>Atcoder: AISing Programming Contest 2019</title>
+      <link>https://00sk0.github.io/blog/posts/atcoder_aising2019/</link>
+      <pubDate>Sat, 12 Jan 2019 22:00:49 +0900</pubDate>
+      
+      <guid>https://00sk0.github.io/blog/posts/atcoder_aising2019/</guid>
+      <description>&lt;p&gt;ROMっていた．D問題の解説がよく分からない．&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

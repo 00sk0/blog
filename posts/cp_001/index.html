@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/cp_001/"></link>
+    <title>
+        競プロ過去問演習#1 - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>競プロ過去問演習#1</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Mar 6, 2019,</time><br> modified:
+                <time>Dec 15, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          <p>競プロの過去問のうち気になったものについてまとめて記録してみる．</p>
+
+<h1 id="no-need-https-atcoder-jp-contests-abc056-tasks-arc070-b"><a href="https://atcoder.jp/contests/abc056/tasks/arc070_b">No Need</a></h1>
+
+<p>よい集合全体を列挙することは到底できないから，その必要がない形に言い換えたい．
+よい集合全体を$G$, 必要なカードの集合を$Need$とする．以下カード$i$を書かれている値$a[i]$と同一視する．</p>
+
+<h2 id="部分点解法-editorial-α">部分点解法(editorial+α)</h2>
+
+<p>問題文より：
+$$i \notin Need \iff i \in \forall s \in G \mbox{ s.t. } s \setminus \{i\} \in G$$
+である．先の要請から$ \forall $を消すために対偶を取ると：
+$$i \in Need \iff i \in \exists s \in G \mbox{ s.t. } s \setminus \{i\} \notin G. $$
+ところで$s \in G$とは$\sum s \ge K$のことであった．このようにカードの数に関する形に言い換えてみると：
+$$i \in Need \iff i \in \exists s, \sum s \ge K \mbox{ s.t. } \sum s - i \lt K$$
+すなわち$K \le \sum s \lt K + i$かつ$i$を含む集合$s$が存在すれば$i$が必要であることが分かる．</p>
+
+<p>このような集合$s$が存在するか知りたい．「総和が範囲内であるような集合が存在するか」は$dp[v] = ($総和が$v$の集合が存在するか$)$のようなdp配列を更新する過程で求まる．すなわち行うdpは初期値$dp[i] = true$，状態$O(K)$（$\because K+i$以上は考えなくてよい），遷移$O(N)$（$\because i$枚目以外の任意のカード$j$に対し，dp配列の値がある箇所$dp[v]$について$dp[v+j] \gets true$とする）となる．これをすべての$i$に対して繰り返すから，計算量は$O(N^2 K)$となって部分点解法が得られる．</p>
+
+<p>このdpができることはeditorialを見るまで気付けなかったのだが，集合（の構成過程）を状態と見れば，総和が等しい状態を纏めて考えることができる，というような考え方でよいのだろうか．</p>
+
+<p>追記(2019/03/09): <a href="http://www.dais.is.tohoku.ac.jp/~shioura/teaching/ad09/ad09-08.pdf">DPの資料</a>を漁っていたら部分和問題と言うものが載っていた．これは総和がある値であるかの判定問題だが，今回のように範囲内か否かも同様のDPで可能．典型DPをきちんと抑えておく必要性を感じる．ちなみに$K$が大きかったら半分全列挙をすれば$O(2^{N/2})$<a href="https://www.slideshare.net/wata_orz/ss-12131479">らしい</a>．</p>
+
+<h2 id="満点解法-editorial">満点解法(editorial)</h2>
+
+<p>累積和のほうは解読できなかったので二分探索についてだけ．</p>
+
+<p>カード$i \le j$について$i$が必要ならば$j$も必要である：再掲するが，
+$$i \in Need \iff i \in \exists s \ \st K \le \sum s \lt K + i$$
+であった．いま$i$が必要とするとこのような$s$が存在するはずである．$s$の候補は(1)$j$を含むか(2)$j$を含まないかに二分される．
+(1)の場合$\sum s \lt K + i$から$\sum s - j \le \sum s - i \lt K$．よって$K \le \sum s \lt K + j$であるから$j$も必要であることが言える．
+(2)の場合では$s$から$i$を除いて$j$を加えた集合$t$を考えてみると，$K \le K - i + j \le \sum s - i + j \lt K + j$であるから$t$は$K \le \sum t \lt K+j$を満たす（$\because$ $\sum t = \sum s - i + j$）．従って$j$を必要たらしめる集合$t$が構成できるから$j$も必要．</p>
+
+<p>よって必要である最小のカードを見付ければ，それ以上のカードはすべて必要であり，それ未満のカードはすべて不要となる．従って単調性から二分探索が可能． <a href="https://atcoder.jp/contests/abc056/submissions/4359880">https://atcoder.jp/contests/abc056/submissions/4359880</a></p>
+
+<p>単調性の説明ってeditorialにさらっと載っているだけだったのだけどもっと簡単に言えるのだろうか．あまり自明な気はしないのだけど．</p>
+
+<h2 id="嘘解法と別解">嘘解法と別解</h2>
+
+<p>数か月前に解こうと思ったときに参照したところ嘘解法（提出すればACだが実際には誤った解法という意味の競プロ用語）だった記事があり，そこから正解法にできないかと考えた記録．元記事へのリンクを張るのは忍びないので行わない．</p>
+
+<p>嘘解法の概略：書いてある数字の大きいほうからカードを読んで和$u$を記録する．$u \ge K$になれば$u$を構成する数は必要最小限でよい集合を為すから，それ以外の数はそこまでの過程では不要になる．よってそこの番地$ans$を記録しておけば，最終的に$ans$から右がすべて不要な数と分かる．$u \lt K$であれば$u$にカードの数を加算する．</p>
+
+<p>これはすなわち「その構成要素だけでは良い集合たりえないが，加える$a[i]$によっては良い集合になるような候補」のうち最適，すなわち$K$との差が最も小さいものを$u$が表せていると信じていることに基づいている（と解釈した）．</p>
+
+<p>ところが例えば<code>K=26, a={18,10,9,7}</code>を考える．3番目まで見たとき$u=a[1]=18$であるが，このとき実際に最も$K$に近い候補は集合$V=\{a[2],a[3]\}=\{10,9\}$の総和$19$であって$u$ではない．ここで$a[4]$を採用するとき，元の$u$だと$u+7=25 \lt K$となり$7$は不必要なカードとなってしまう一方，$V$の場合では集合$\{a[2],a[3],a[4]\}=\{10,9,7\}$の総和は$19+7=26=K$となり正しく$7$が必要なカードと判定される．このような理由からこれは嘘解法である．</p>
+
+<p>さて実際に$u$として持っておきたいのは，$K$との差が最も小さい候補であった．反例で見たように逆転が起こるから実際にこれだけを持つことは無理そう．よって先の部分点解にあるdp配列を更新することになるが，これでも各$i$に相当する処理が不要なので$O(NK)$で済む． <a href="https://atcoder.jp/contests/abc056/submissions/4354952">https://atcoder.jp/contests/abc056/submissions/4354952</a></p>
+
+<p>解法の正当性を言いたい（こういうの自信ないので誤りを含みそう）．以下$w$としたときは$dp[w]=true$である，すなわち$w \lt K$が総和となる数の集合$S _w$が存在するものに限るとする．
+いま新たにカード$v$を考える．ある$w$に対して$w+v \ge K$となる場合，カードを降順に見ていったことから，$S _{w+v}$（$S _ {w+v}$自体は複数あり得るがそのうち$v$を含むものとする）は「必要最小限なよい集合」，すなわちこれに含まれるどの数字を除いてもよい集合ではなくなる（$\because$ 降順より$\forall i \in S_w$について$v \le i$であり，また$v$の必要性から$K \le \sum S _ {w+v} \lt K + v$であるから，$\sum S _ {w+v} - i \lt K + v - i \le K$．ゆえに集合$S&rsquo; := S _ {w+v} \setminus \{i\}$は$\sum S&rsquo; \lt K$であるからよい集合に属さない）．したがって$S _ {w+v}$に含まれるすべてのカードは必要である．一方で$w$が存在しない場合は$v$は（現時点では）不要である．</p>
+
+<p>いま$v$が必要になったとする．$v$の前に不必要と判定されたカード$u$があるとき，$u$は必要となるかを考えたい（満点解法の説明にもあるが念の為）．ここで$v$を必要たらしめた$S_ w$を考える．ここに$u$が含まれていれば$S _ w$の最小性から$u$も必要となる．一方でそうでない場合を考えたいが，このとき降順から$\sum S_ {w+u} = \sum S_ w + u \ge \sum S_ w + v \ge K$であり，また$\sum S _ w \lt K$であったから$\sum S _ {w+u} \lt K + u$．これらから$K \le \sum S _ {w+u} \lt K + u$，すなわち$u$についても$S_ w$で必要とできることが分かるから，これはあり得ない．</p>
+
+<p>従って$v$が必要と判明したとき，それまでの全カードが必要であることが分かる．よって$v$が$i$番目のカードのとき$ans \gets i$とし，最終的に$ans$番目より右側のカード，すなわち$n-ans$枚が不要とすればよい．</p>
+
+<p>テストケースを様々な範囲で計5000個ほど自動生成して先のeditorial解と出力を比較してみたところすべて等しかったので，きっと正しい解法になったはずだと信じている．</p>
+
+<h1 id="makoto-and-a-blackboard-https-codeforces-com-contest-1097-problem-d"><a href="https://codeforces.com/contest/1097/problem/D">Makoto and a Blackboard</a></h1>
+
+<p>$p _ i (v) := $「$i$回目で数字が$v$となる確率」とすると，漸化式$p _ {i+1} (v) \gets \sum_{w \st v \in D(w)} p _ {i}  (w) / |D(w)| \ (D(v) := v$の約数$)$が立つ．これに従うと求める値は$\sum _{w \in D(n)} w p _ k (w)$と書けるが，これを求めるには$n$の約数を再帰的に因数分解する必要がありそうだし，それを除いても$O(|D(n)|k)$は掛かりそう（自信ない）．約数の個数$|D(n)|$の評価は難しいようだが少なくとも間に合わない．ここで詰まった．</p>
+
+<p>ここで「$v$の約数$d$を選ぶ」というのは，$v= \prod p _ i ^ {k _ i}$と素因数分解したとき，$d = \prod p _ i ^ {k&rsquo; _ i} \st k&rsquo; _ i \le k _ i$を選ぶ，すなわち各素因数$p _ i$の個数$k&rsquo; _ i$を決定することである．
+例えば$v=72=2^3 \times 3^2$のとき，約数は$\{1,2,3,4,6,8,9,12,18,24,36,72\}$であるが，これは$2^3$の約数$\{1,2,4,8\}$と$3^2$の約数$\{1,3,9\}$の積である．このように約数を選ぶことは各素因数の組からそれぞれ好きなものを選ぶことと等しい．
+この決定は互いに独立であるから，「積の期待値＝期待値の積」となり，$E[v]=E[\prod p _ i ^ {k _ i}] = \prod E[p _ i ^ {k _ i}]$という風に各素因数に対して求めた結果の積を取ればよい<sup class="footnote-ref" id="fnref:maab"><a href="#fn:maab">1</a></sup>．</p>
+
+<p>以下では素因数$p$について求める．いま初期値$n$に含まれる$p$が$l$個のとき，$dp[i][j] := i$回目で数字が$p^j$となる確率とおく．すると素朴には$dp[i+1][j] \gets \sum_{j \le w \le l} dp[i][w]/(j+1)$と更新できる．この計算量は$O(kl^2)$であり，$l$は最大でも$O(\log_2 n)$なので$O(k \log ^2 n)$．</p>
+
+<p>実際はこれだと間に合わない（手元やAtCoderだと1sだがCodeforces上だと3s．C++なら間に合うのでは？）ため，DPを高速化する必要がある．これは$j$を降順に試すとき，$dp[i+1][j] \gets dp[i+1][j+1]+dp[i][j]/(j+1)$であることに着目すると$w$が不要になることを利用する<sup class="footnote-ref" id="fnref:maab2"><a href="#fn:maab2">2</a></sup>．これにより計算量は$O(k \log n)$となる．</p>
+
+<p>これを各素因数について行うと計算量は$O(L k \log n) \ (L := $素因数の個数$)$と書ける．素数を14個掛け合わせると$1.3 \times 10^{16} \gt n$であるから$L \lt 14$であり間に合いそうな気がしてくる．以上から最初の素因数分解とあわせて全体の計算量は$O(\sqrt n + k \log n)$．</p>
+
+<p>初めての解答方式<sup class="footnote-ref" id="fnref:maab3"><a href="#fn:maab3">3</a></sup>だったが，これは逆元を求めればよい．最初は「分数$P/Q$で保持して最後に$P \times inv(Q)$しなければならない」と思っていたのだが，実際は分数$p/q$が出てくるたびに$p \times inv(q)$として扱って大丈夫（逆にそうではないと定義として壊れてそう．代数学の知識がないのでよく分からないが）．逆元の実装はeditorialにもあるFermatの小定理版だとかなり低速だったので，拡張ユークリッド法によるものを用いた（初実装．<a href="https://qiita.com/drken/items/b97ff231e43bce50199a">参考記事</a>）．因みに他の人の提出を見ていると，modつき$\ncr {n} {r}$を計算するときのように配列に前計算しているケースも多かった．</p>
+
+<p>ACコード（TLEギリギリ）: <a href="https://codeforces.com/contest/1097/submission/50660668">https://codeforces.com/contest/1097/submission/50660668</a></p>
+
+<p>追記（19/03/07）：素因数分解でリストを作っている箇所を<a href="https://codeforces.com/contest/1097/submission/50878640">大きさを決め打った配列に直したら560ms速くなった</a>．あるいは仮定せずとも<a href="https://codeforces.com/contest/1097/submission/50885557"><code>Hashtbl</code>を用いてもよさそう</a>（手元で5回測定した平均だとテストケース<code>&quot;10^15 10^4&quot;</code>で前者のほうが10ms早い程度）．今後はこのような処理では<code>Hashtbl</code>を用いたほうがよいのかもしれない？</p>
+
+<p>約数を素因数毎に分解して考えるというのは完全に盲点だった．一方で約数の個数を求める公式（？）も似た考えで導出できることから，そんなに突飛な考え方でもなかったのかもしれない．また競技プログラミングでは今回のように確率や期待値の概念も割と出題される（2回目のAtCoderで出題されて困った思い出がある）ため，よい成績を取りたいのであればそのあたりを復習しておいたほうがよい気もする．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:maab">期待値の記法がおかしい気がする．
+ <a class="footnote-return" href="#fnref:maab"><sup>[return]</sup></a></li>
+<li id="fn:maab2">加えて速度にはそこまで影響しなそうだが$j$を降順にすることで$i$の番地も不要になるため，解答ではそのようにしている．
+ <a class="footnote-return" href="#fnref:maab2"><sup>[return]</sup></a></li>
+<li id="fn:maab3">F問題とかで見たことはあったが解くのは初めて．
+ <a class="footnote-return" href="#fnref:maab3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>

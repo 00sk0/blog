@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://00sk0.github.io/blog/common/bundle.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://00sk0.github.io/blog/common/bundle.js"></script>
+    <link rel="canonical" href="https://00sk0.github.io/blog/posts/inversion_number/"></link>
+    <title>
+        転倒数とBinary Indexed Tree - sk0&#39;s blog</title>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="wrap">
+      <header id="top">
+        <div id="title">
+          <h1><a href="https://00sk0.github.io/blog/">sk0&#39;s blog</a></h1>
+        </div>
+        <nav id="site">
+          <ul>
+            
+            
+            
+            <li><a href="https://00sk0.github.io/blog/about">about</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <article id="main">
+          <header>
+            <h1>転倒数とBinary Indexed Tree</h1>
+            
+            <div id="article_info">
+              <p id="dates">published:
+                <time>Dec 25, 2018,</time><br> modified:
+                <time>Dec 15, 2019.</time>
+              </p>
+              <p id="categories">
+                categories:
+                
+                
+                <a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a>
+                
+                
+              </p>
+              <p id="tags">
+                tags:
+                
+                
+                <a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a>
+                
+                <a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a>
+                
+                
+              </p>
+            </div>
+            
+          </header>
+          <p>転倒数とBITについて知ったのでまとめておく．</p>
+
+<p>以下では自然数配列$a$と普通の大小関係について考える．転倒数とは，組$(i,j)$ s.t. $j \lt i \land a_j \gt a_i$の個数，すなわち$i$項よりも左にある$a_i$より大きい項の数の和<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>．これを高速に求めたい．</p>
+
+<h1 id="o-n-2-解">$O(n^2)$解</h1>
+
+<p>二重ループで定義通りに計算：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> count_inv a <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">open</span> <span style="color:#a6e22e">Array</span> <span style="color:#66d9ef">in</span>
+  <span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span> mapi <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> i v <span style="color:#f92672">-&gt;</span> i<span style="color:#f92672">,</span>v<span style="color:#f92672">)</span> a <span style="color:#66d9ef">in</span>
+  fold_left <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> sum <span style="color:#f92672">(</span>i<span style="color:#f92672">,</span>v<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+    fold_left <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> sum <span style="color:#f92672">(</span>j<span style="color:#f92672">,</span>w<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+      <span style="color:#66d9ef">if</span> j<span style="color:#f92672">&lt;</span>i <span style="color:#f92672">&amp;&amp;</span> w<span style="color:#f92672">&gt;</span>v <span style="color:#66d9ef">then</span>
+        <span style="color:#f92672">(</span>a<span style="color:#f92672">.(</span>j<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;-</span> j<span style="color:#f92672">,</span>v<span style="color:#f92672">;</span> a<span style="color:#f92672">.(</span>i<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;-</span> i<span style="color:#f92672">,</span>w<span style="color:#f92672">;</span> sum<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span>
+      <span style="color:#66d9ef">else</span> sum<span style="color:#f92672">)</span> sum a<span style="color:#f92672">)</span> 0 a</code></pre></div>
+<p>見てわかるとおりこの計算量は$O(n^2)$<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">2</a></sup>．実際はこの問題は$O(n\log n)$で解くことができる．必要なのは元配列の区間$[0,i]$について「値$a[i]$より大きい要素の数」を求めるクエリに答える機能．</p>
+
+<h1 id="bitについて">BITについて</h1>
+
+<p>これを実現する方法の一つにBinary Indexed Treeの利用がある．BITは次の操作を$O(\log |v|)$で可能とするデータ構造である（以下の<a href="http://hos.ac/slides/20140319_bit.pdf">参考文献</a>）：</p>
+
+<ul>
+<li>$v[i] \leftarrow v[i]+w$</li>
+<li>$\sum v[0,i]$を求める（$\sum v[l,r]$も$[0,r]-[0,l-1]$として求まる）</li>
+</ul>
+
+<p>これはサイズ$|v|$の配列$b$を用意することで実装可能．原理については参考文献がわかりやすいので基本的に省略するが，LSBが$x \&amp; -x$で求まることについて脚注で軽く説明しておく<sup class="footnote-ref" id="fnref:lsb"><a href="#fn:lsb">3</a></sup>．</p>
+
+<p>具体的な実装は次<sup class="footnote-ref" id="fnref:fix"><a href="#fn:fix">4</a></sup>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">rec</span> fix f x <span style="color:#f92672">=</span> f <span style="color:#f92672">(</span>fix f<span style="color:#f92672">)</span> x
+<span style="color:#66d9ef">module</span> <span style="color:#a6e22e">BIT</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">struct</span>
+  <span style="color:#66d9ef">let</span> lsb i <span style="color:#f92672">=</span> i <span style="color:#f92672">land</span> <span style="color:#f92672">-</span>i
+  <span style="color:#66d9ef">let</span> sum i b <span style="color:#f92672">=</span> <span style="color:#75715e">(* 0-indexed; Σv[0,i-1] *)</span>
+    fix <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> f i s <span style="color:#f92672">-&gt;</span>
+      <span style="color:#66d9ef">if</span> i<span style="color:#f92672">&gt;</span>0 <span style="color:#66d9ef">then</span> f <span style="color:#f92672">(</span>i <span style="color:#f92672">-</span> lsb i<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>s <span style="color:#f92672">+</span> b<span style="color:#f92672">.(</span>i<span style="color:#f92672">))</span> <span style="color:#66d9ef">else</span> s<span style="color:#f92672">)</span> i 0
+  <span style="color:#66d9ef">let</span> sum_closed i <span style="color:#f92672">=</span> sum <span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span> <span style="color:#75715e">(* 0-indexed; Σv[0,i] *)</span>
+  <span style="color:#66d9ef">let</span> sum_interval l r b <span style="color:#f92672">=</span>
+    <span style="color:#75715e">(* 0-indexed; Σv[l,r] = Σv[0,r+1-1] - Σv[0,l-1] *)</span>
+    <span style="color:#66d9ef">if</span> l<span style="color:#f92672">&gt;</span>r <span style="color:#66d9ef">then</span> 0 <span style="color:#66d9ef">else</span> sum <span style="color:#f92672">(</span>r<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span> b <span style="color:#f92672">-</span> sum l b
+  <span style="color:#66d9ef">let</span> add i x b <span style="color:#f92672">=</span> <span style="color:#75715e">(* 0-indexed; v[i]+=x. not b *)</span>
+    fix <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> f i <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">if</span> i<span style="color:#f92672">&lt;</span>Array.length b <span style="color:#66d9ef">then</span> <span style="color:#f92672">(</span>
+      b<span style="color:#f92672">.(</span>i<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;-</span> b<span style="color:#f92672">.(</span>i<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> x<span style="color:#f92672">;</span> f <span style="color:#f92672">(</span>i <span style="color:#f92672">+</span> lsb i<span style="color:#f92672">)))</span> <span style="color:#f92672">(</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">let</span> of_array v <span style="color:#f92672">=</span> <span style="color:#66d9ef">let</span> b <span style="color:#f92672">=</span> Array.make <span style="color:#f92672">(</span>Array.length v <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> 0 <span style="color:#66d9ef">in</span>
+    Array.iteri <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> i v <span style="color:#f92672">-&gt;</span> add i v b<span style="color:#f92672">)</span> v<span style="color:#f92672">;</span> b
+  <span style="color:#66d9ef">let</span> make n <span style="color:#f92672">=</span> Array.make <span style="color:#f92672">(</span>n<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span> 0
+  <span style="color:#66d9ef">let</span> reconst b <span style="color:#f92672">=</span> Array.init <span style="color:#f92672">(</span>Array.length b<span style="color:#f92672">-</span>1<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>
+    <span style="color:#66d9ef">fun</span> i <span style="color:#f92672">-&gt;</span> sum_interval i i b<span style="color:#f92672">)</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
+<p>なお当たり前ではあるが<code>add</code>の対象は元配列$v$のほうなのでデバッグ時に混乱しないように注意（私はやらかしたのでデバッグ用に$b$から$v$を復元する関数を作ってみた）．</p>
+
+<h1 id="bitの利用">BITの利用</h1>
+
+<p>今回答えるべきクエリは$i=0,&hellip;,n-1$に対して「$a[0],&hellip;,a[i-1]$に現れる値$a[i]$より大きい要素の数」だった．ここである配列$v$の$a[0],&hellip;,a[i-1]$番目にその値の出現回数を記録しておくことを考えると，$\sum v[l,r]$は$l$以上$r$以下の値の出現回数の和となっている．したがって$\sum v[a[i]+1,\max\{a\}]$を見ることで「$a[i]$より大きい要素数」を求めることができる．</p>
+
+<p>BITを用いるとこれが$O(\log|v|)$，すなわち$O(\log(\max\{a\}))$で計算できる．$a[i]$の追加とこの計算を$i=0,&hellip;,n-1$に対して繰り返すことで，時間計算量$O(n\log(max\{a\}))$で転倒数を得ることが可能．</p>
+
+<p>$\max\{a\}$が大きいときはBITの空間計算量$O(\max\{a\})$が厳しくなるが，$a$を座標圧縮しておけば空間計算量$O(n)$かつ時間計算量$O(n\log n)$にできる．</p>
+
+<h2 id="例">例</h2>
+
+<p>$a=[3,1,5,3,2]$の転倒数を求める．BITは$b=[0,0,0,0,0,0]$(0-indexed)．</p>
+
+<ul>
+<li>$a[ 0 ]=3$を追加：$b=[0,0,0,1,0,0]$．$\sum a[4,5]=0$．</li>
+<li>$a[ 1 ]=1$を追加：$b=[0,1,0,1,0,0]$．$\sum a[2,5]=1$．</li>
+<li>$a[ 2 ]=5$を追加：$b=[0,1,0,1,0,1]$．$\sum a[6,5]=0$．<sup class="footnote-ref" id="fnref:aa"><a href="#fn:aa">5</a></sup></li>
+<li>$a[ 3 ]=3$を追加：$b=[0,1,0,2,0,1]$．$\sum a[4,5]=1$．</li>
+<li>$a[ 4 ]=2$を追加：$b=[0,1,1,2,0,1]$．$\sum a[3,5]=3$．</li>
+</ul>
+
+<p>以上より転倒数は5となる．コード（座標圧縮なし）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span> <span style="color:#f92672">[|</span>3<span style="color:#f92672">;</span>1<span style="color:#f92672">;</span>5<span style="color:#f92672">;</span>3<span style="color:#f92672">;</span>2<span style="color:#f92672">|]</span>
+<span style="color:#66d9ef">let</span> mx <span style="color:#f92672">=</span> Array.fold_left max 0 a
+<span style="color:#66d9ef">let</span> b <span style="color:#f92672">=</span> BIT.make <span style="color:#f92672">(</span>mx<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span>
+<span style="color:#66d9ef">let</span> () <span style="color:#f92672">=</span> print_int <span style="color:#f92672">@@</span>
+  Array.fold_left <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> sum v <span style="color:#f92672">-&gt;</span>
+    BIT.add v 1 b<span style="color:#f92672">;</span>
+    sum <span style="color:#f92672">+</span> BIT.sum_interval <span style="color:#f92672">(</span>v<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span> mx b<span style="color:#f92672">)</span> 0 a</code></pre></div>
+<h1 id="ジャッジ">ジャッジ</h1>
+
+<p><a href="https://atcoder.jp/contests/chokudai_s001/tasks/chokudai_S001_j">Chokudai SpeedRun 001: J - 転倒数</a>．座標圧縮しなくても<a href="https://atcoder.jp/contests/chokudai_s001/submissions/3875548">通る</a>．<a href="https://atcoder.jp/contests/chokudai_s001/submissions/3877048">座標圧縮版</a>（あんまりテストしてない）．</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">wikipediaでは右にある小さい項の数を数えているが，視点を逆にすれば同じこと．
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:4">普通に（？）実装しても$1+2+&hellip;+n = n(n+1)/2$．
+ <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
+
+<li id="fn:lsb"><p>2の補数を思い出せば$-x$は($x$のビットを反転させたもの+1)となる．以下ビット反転を$\tilde x$と書く．$x$のLSBを$d$桁目(0-indexed)とすると，$x$は$d-1$桁目までは0, $d$桁目は1となっている．よって$\tilde x$は$d-1$桁目まで1, $d$桁目で0となる．ここに1を足せば$-x$が求まる：1を足すと繰り上がりが起こり，$d-1$桁目まで0，$d$桁目が1となる．これと$x$との論理積を取る：$d-1$桁目まではともに0であるから0．$d$桁目も1で等しいから1．$d+1$桁目以降の$-x$は$\tilde x$と変わらないから0となる．したがって0&hellip;.010&hellip;0の形となり，10進法で$x \&amp; -x=2^{d}$であるからLSBが求まる．図にすると次：</p>
+
+<pre><code> x   = 011001001110000
+~x   = 100110110001111
+-x   = 100110110001111
+                    +1
+     = 100110110010000
+x&amp;-x = 000000000010000
+</code></pre>
+ <a class="footnote-return" href="#fnref:lsb"><sup>[return]</sup></a></li>
+<li id="fn:fix">定義が面倒なのでfix関数を使ってしまったものの，少なくとも他の例題ではきちんと再帰関数を定義したほうが速かった．
+ <a class="footnote-return" href="#fnref:fix"><sup>[return]</sup></a></li>
+<li id="fn:aa">このように$a[i]=\max\{a\}$となる場合のために$\max\{a\}+1$領域確保しておく．
+ <a class="footnote-return" href="#fnref:aa"><sup>[return]</sup></a></li>
+</ol>
+</div>
+          <nav id="adjacent">
+            
+            <div id="next">
+              <p><a href="https://00sk0.github.io/blog/posts/cf_edu_057/">Educational Codeforces #57</a></p>
+            </div>
+            
+            
+            <div id="prev">
+              <p><a href="https://00sk0.github.io/blog/posts/hugo_deploy/">Hugo製サイトをWerckerでGitHub Pagesにデプロイ</a></p>
+            </div>
+            
+          </nav>
+        </article>
+        <div id="information">
+          <aside id="brief_about">
+            <p>WIP</p>
+          </aside>
+          <nav>
+            <section>
+              <h1><a href="https://00sk0.github.io/blog/posts">Latest Articles</a></h1>
+              <ul id="info_latest_articles">
+                
+                  <li><a href="https://00sk0.github.io/blog/posts/abc126/">AtCoder Beginner Contest #126</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_diverta2019/">AtCoder: diverta 2019 Programming Contest</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc125/">AtCoder Beginner Contest #125</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc121/">AtCoder Beginner Contest #121</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cp_001/">競プロ過去問演習#1</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc120/">AtCoder Beginner Contest #120</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc119/">AtCoder Beginner Contest #119</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/abc118/">AtCoder Beginner Contest #118</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_yahoo2019/">Atcoder: みんなのプロコン2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_nikkei2019/">Atcoder: Nikkei Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_edu_059/">Educational Codeforces #59</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_532/">Codeforces Round #532</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/atcoder_aising2019/">Atcoder: AISing Programming Contest 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_530/">Codeforces Round #530</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_hello_2019/">Codeforces Hello 2019</a></li>
+                  <li><a href="https://00sk0.github.io/blog/posts/cf_goodbye2018/">Codeforces Good Bye 2018</a></li>
+              </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/categories">Categories</a><sub>x3</sub></h1>
+              <ul id="info_categories">
+                <li><a href="https://00sk0.github.io/blog/categories/competitive_programming">competitive_programming</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/dev">dev</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/categories/random">random</a><sub>x1</sub></li>
+                </ul>
+            </section>
+            <section><h1><a href="https://00sk0.github.io/blog/tags">Tags</a><sub>x9</sub></h1>
+              <ul id="info_tags">
+                <li><a href="https://00sk0.github.io/blog/tags/ocaml">ocaml</a><sub>x18</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/contest">contest</a><sub>x16</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/atcoder">atcoder</a><sub>x11</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/codeforces">codeforces</a><sub>x7</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/hugo">hugo</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/website">website</a><sub>x2</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/algorithm">algorithm</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/gh-pages">gh-pages</a><sub>x1</sub></li>
+                <li><a href="https://00sk0.github.io/blog/tags/wercker">wercker</a><sub>x1</sub></li>
+                </ul>
+            </section>
+          </nav>
+        </div></main>
+      <footer id="top">
+        <p id="cp">copyright © 2019 sk0</p>
+        <p><a href="https://gohugo.io/">Hugo</a>-powered!</p>
+      </footer>
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      });
+      MathJax.Hub.Config({
+        TeX:{
+          Macros:{
+            la: '{\\hspace{5px} \\leftarrow  \\hspace{5px}}',
+            ra: '{\\hspace{5px} \\rightarrow \\hspace{5px}}',
+            st: '{\\mbox{ s.t. }}',
+            ncr: ['{ {} _ {#1} \\mathrm{C} _ {#2} }',2],
+            br: '\\\\\\',
+            eq: '\\iff' //\\Leftrightarrow
+          }
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+  </body>
+</html>
